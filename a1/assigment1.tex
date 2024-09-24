@@ -32,31 +32,23 @@
         \end{enumerate}
     \end{enumerate}
 
-    \item If the simple linear regression model can be written as $y_i = \beta_0 + \beta_1 x_i + \epsilon_i$,
-        where $E[\epsilon_i] = 0$ and $E[\epsilon^2_i] = \sigma^2$ and where the $\epsilon$'s are independent,
-        the ith fitten value is denoted by $\hat{y_i}$ and the $i$th residual is denoted by 
-        $e_i$ $(i = 1, 2 , \ldots , n)$, we can show that: 
+    \item \textbf{Remark:} from ch2A.pdf slide 9 and 13,
+        \begin{itemize}
+            \item $\hat{\beta_0} = \bar{y} - \hat{\beta_1}\bar{x}$
+            \item $\hat{\beta_1} = \frac{S_{xy}}{S_{xx}}$
+            \item $S_{xy} = \sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})$
+            \item $S_{xx} = \sum_{i=1}^{n} (x_i - \bar{x})^2$
+        \end{itemize}
+    
     \begin{enumerate}[(a)]   
         \item $\sum_{i=1}^{n} e_i = 0$
         \begin{proof}
             Let $e_i$ be the $i$th residual term. Then for each observation, we can see that
             the residual for each observation $i$ is defined as: 
             \[e_i = y_i - \hat{y_i}\]
-            where,
-            \begin{itemize}
-                \item $y_i$ is the actual observed value of the dependent variable.
-                \item $\hat{y_i}$ is the predicted value obtained from the regression model.
-            \end{itemize}
             then we can say that the predicted value $\hat{y_i}$ is equivalent to
             \[\hat{y_i} = \hat{\beta_0} + \hat{\beta_1} x_i \]
-            Where,
-            \begin{itemize}
-                \item $\hat{\beta_0} = \bar{y} - \hat{\beta_1}\bar{x}$
-                \item $\hat{\beta_1} = \frac{S_{xy}}{S_{xx}}$
-                \item $S_{xy} = \sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})$
-                \item $S_{xx} = \sum_{i=1}^{n} (x_i - \bar{x})^2$
-            \end{itemize}
-            We want to show that:
+            Now we want to show that:
             \[\sum_{i=1}^{n} e_i = 0\]
             LHS$\colon$
             \begin{align*}
@@ -69,12 +61,34 @@
             \end{align*}
             \[LHS = 0 = RHS\]
             $\therefore$ The sum of residuals $e_i$ is zero.
-
-            
-            
-            
-
         \end{proof}
+        \item $\sum_{i=1}^{n} x_i e_i = 0$
+            \begin{proof}
+                \begin{align*}
+                    \sum_{i=1}^{n} x_i e_i &= \sum_{i=1}^{n} x_i (y_i - \hat{y_i}) \\
+                    &= \sum_{i=1}^{n} x_i (y_i - \hat{\beta_0} - \hat{\beta_1} x_i) \\
+                    &= \sum_{i=1}^{n} (x_i y_i - x_i (\bar{y} - \hat{\beta_1}\bar{x}) - \hat{\beta_1} x_i^2) \\
+                    &= \sum_{i=1}^{n} (x_i y_i - x_i\bar{y} + x_i\hat{\beta_1}\bar{x} - \hat{\beta_1} x_i^2) \\
+                    &= \sum_{i=1}^{n} (x_i(y_i - \bar{y}) + \hat{\beta_1}(\bar{x}x_i - x_i^2)) \\
+                    &= \sum_{i=1}^n x_i y_i - \bar{y} \sum_{i=1}^n x_i - \hat{\beta}_1 \left( \sum_{i=1}^n x_i^2 - \bar{x} \sum_{i=1}^n x_i \right) \\
+                    &= \left( \sum_{i=1}^n x_i y_i - n \bar{x} \bar{y} \right) - \hat{\beta}_1 \left( \sum_{i=1}^n x_i^2 - n \bar{x}^2 \right) \\
+                    &= \left( \sum_{i=1}^n x_i y_i - n \bar{x} \bar{y} - n \bar{x} \bar{y} + n \bar{x} \bar{y} \right) - \hat{\beta}_1 \left( \sum_{i=1}^n x_i^2 -  n \bar{x}\bar{x} -  n \bar{x}\bar{x} + n \bar{x}\bar{x} \right) \\
+                    &= \left( \sum_{i=1}^n x_i y_i - n \bar{x} \bar{y} - n \bar{x} \bar{y} + n \bar{x} \bar{y} \right) - \hat{\beta}_1 \left( \sum_{i=1}^n x_i^2 - 2 n \bar{x}\bar{x} + n \bar{x}\bar{x} \right) \\
+                    &= \left( \sum_{i=1}^n x_i y_i - \bar{y}\sum_{i=1}^n x_i - \bar{x}\sum_{i=1}^n y_i + n \bar{x} \bar{y} \right) - \hat{\beta}_1 \left( \sum_{i=1}^n x_i^2 - 2\bar{x}\sum_{i=1}^n x_i + n \bar{x}^2 \right) \\
+                    &= \sum_{i=1}^n \left(  x_i y_i - \bar{y}x_i - \bar{x}y_i + \bar{x}\bar{y} \right) - \hat{\beta}_1 \sum_{i=1}^n \left( x_i^2 - 2\bar{x} x_i + \bar{x}^2 \right) \\
+                    &= \sum_{i=1}^n \left(  x_i (y_i - \bar{y}) + \bar{x}(y_i - \bar{y}) \right) - \hat{\beta}_1 \sum_{i=1}^n (x_i - \bar{x})^2 \\
+                    &= \sum_{i=1}^n (x_i + \bar{x})(y_i - \bar{y}) - \hat{\beta}_1 \sum_{i=1}^n (x_i - \bar{x})^2 \\
+                    &= S_{xy} - \hat{\beta}_1 S_{xx} \\
+                    &= S_{xy} - \frac{S_{xy}}{S_{xx}} S_{xx} \\
+                    &= S_{xy} - S_{xy} \\
+                    &= 0 \\
+                \end{align*}
+                \[LHS = 0 = RHS\]
+            \end{proof}
+        \item $\sum_{i=1}^{n} \hat{y_i}e_i = 0$
+            \begin{proof}
+                    
+            \end{proof}
     \end{enumerate}
 \end{enumerate}
 
