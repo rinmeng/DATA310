@@ -39,31 +39,29 @@
             \item $S_{xy} = \sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})$
             \item $S_{xx} = \sum_{i=1}^{n} (x_i - \bar{x})^2$
         \end{itemize}
-    
-    \begin{enumerate}[(a)]   
-        \item $\sum_{i=1}^{n} e_i = 0$
-        \begin{proof}
-            Let $e_i$ be the $i$th residual term. Then for each observation, we can see that
+        Let $e_i$ be the $i$th residual term. Then for each observation, we can see that
             the residual for each observation $i$ is defined as: 
             \[e_i = y_i - \hat{y_i}\]
             then we can say that the predicted value $\hat{y_i}$ is equivalent to
             \[\hat{y_i} = \hat{\beta_0} + \hat{\beta_1} x_i \]
-            Now we want to show that:
-            \[\sum_{i=1}^{n} e_i = 0\]
-            LHS$\colon$
-            \begin{align*}
-                \sum_{i=1}^{n} e_i &= \sum_{i=1}^{n} (y_i - \hat{y_i}) \\
-                &= \sum_{i=1}^{n} (y_i - \hat{\beta_0} - \hat{\beta_1} x_i) \\
-                &= \sum_{i=1}^{n}(y_i - \bar{y} + \hat{\beta_1}\bar{x} - \hat{\beta_1} x_i) \\
-                &= \sum_{i=1}^{n}y_i - n\bar{y} + \hat{\beta_1}n\bar{x} - \hat{\beta_1} \sum_{i=1}^{n}x_i \\
-                &= n\bar{y} - n\bar{y} + \hat{\beta_1}n\bar{x} - \hat{\beta_1}n\bar{x} \\ 
-                &= 0
-            \end{align*}
-            \[LHS = 0 = RHS\]
-            $\therefore$ The sum of residuals $e_i$ is zero.
-        \end{proof}
+    \begin{enumerate}[(a)]   
+        \item $\sum_{i=1}^{n} e_i = 0$
+            \begin{proof}
+                LHS$\colon$
+                \begin{align*}
+                    \sum_{i=1}^{n} e_i &= \sum_{i=1}^{n} (y_i - \hat{y_i}) \\
+                    &= \sum_{i=1}^{n} (y_i - \hat{\beta_0} - \hat{\beta_1} x_i) \\
+                    &= \sum_{i=1}^{n}(y_i - \bar{y} + \hat{\beta_1}\bar{x} - \hat{\beta_1} x_i) \\
+                    &= \sum_{i=1}^{n}y_i - n\bar{y} + \hat{\beta_1}n\bar{x} - \hat{\beta_1} \sum_{i=1}^{n}x_i \\
+                    &= n\bar{y} - n\bar{y} + \hat{\beta_1}n\bar{x} - \hat{\beta_1}n\bar{x} \\ 
+                    &= 0
+                \end{align*}
+                \[LHS = 0 = RHS\]
+                $\therefore$ The sum of residuals $e_i$ is zero.
+            \end{proof}
         \item $\sum_{i=1}^{n} x_i e_i = 0$
             \begin{proof}
+                LHS$\colon$
                 \begin{align*}
                     \sum_{i=1}^{n} x_i e_i &= \sum_{i=1}^{n} x_i (y_i - \hat{y_i}) \\
                     &= \sum_{i=1}^{n} x_i (y_i - \hat{\beta_0} - \hat{\beta_1} x_i) \\
@@ -85,9 +83,30 @@
                 \end{align*}
                 \[LHS = 0 = RHS\]
             \end{proof}
+            $\therefore$ The residuals and the covariate are uncorrelated in simple linear regression.
         \item $\sum_{i=1}^{n} \hat{y_i}e_i = 0$
-            \begin{proof}
-                    
+            \begin{proof} 
+                LHS$\colon$
+                \begin{align*}
+                    \sum_{i=1}^{n} \hat{y_i}e_i &= \sum_{i=1}^{n} \hat{y_i}(y_i - \hat{y_i}) \\
+                    &= \sum_{i=1}^{n} (y_i\hat{y_i} - \hat{y_i}^2) \\
+                    &= \sum_{i=1}^{n} (y_i(\hat{\beta_0} + \hat{\beta_1} x_i) - (\hat{\beta_0} + \hat{\beta_1} x_i)^2) \\
+                    &= \sum_{i=1}^{n} (y_i(\bar{y} - \hat{\beta_1}\bar{x} + \hat{\beta_1} x_i) - (\bar{y} - \hat{\beta_1}\bar{x} + \hat{\beta_1} x_i)^2) \\
+                    &= \sum_{i=1}^{n} (y_i\bar{y} - y_i\hat{\beta_1}\bar{x} + y_i\hat{\beta_1} x_i  \\
+                    &- (\bar{y}^2 - 2\hat{\beta_1}\bar{y}\bar{x} + \hat{\beta_1}^2\bar{x}^2 + 2\hat{\beta_1}\bar{y}x_i - 2\hat{\beta_1}^2\bar{x}x_i + \hat{\beta_1}^2 x_i^2)) \\
+                    &=  (\sum_{i=1}^{n}y_i\bar{y} - \sum_{i=1}^{n}y_i\hat{\beta_1}\bar{x} + \sum_{i=1}^{n}y_i\hat{\beta_1} x_i  \\
+                    &- \sum_{i=1}^{n} (\bar{y}^2 - 2\hat{\beta_1}\bar{y}\bar{x} + \hat{\beta_1}^2\bar{x}^2 + 2\hat{\beta_1}\bar{y}x_i - 2\hat{\beta_1}^2\bar{x}x_i + \hat{\beta_1}^2 x_i^2)) \\
+                    &= (n\bar{y}^2 - \hat{\beta_1}\bar{y}\bar{x} + \hat{\beta_1}\bar{y}\hat{\beta_1} x_i  \\
+                    &- (\sum_{i=1}^{n} \bar{y}^2 - \sum_{i=1}^{n} 2\hat{\beta_1}\bar{y}\bar{x} + \sum_{i=1}^{n} \hat{\beta_1}^2\bar{x}^2 + \sum_{i=1}^{n}2\hat{\beta_1}\bar{y}x_i - \sum_{i=1}^{n}2\hat{\beta_1}^2\bar{x}x_i + \sum_{i=1}^{n}\hat{\beta_1}^2 x_i^2)) \\
+                    &= (n\bar{y}^2 - (n\bar{y}^2 - 2\hat{\beta_1}n\bar{y}\bar{x} + \hat{\beta_1}^2n\bar{x}^2 + 2\hat{\beta_1}n\bar{y}\bar{x} - 2\hat{\beta_1}^2n\bar{x}\bar{x} + \hat{\beta_1}^2\sum_{i=1}^{n}x_i^2)) \\
+                \end{align*}
+                
+                proof continued.
+                \begin{align*}
+                    \sum_{i=1}^{n} \hat{y_i}e_i &= (n\bar{y}^2 - (n\bar{y}^2 - \hat{\beta_1}^2n\bar{x}^2 + \hat{\beta_1}^2n\bar{x}^2)) \\
+                    &= (n\bar{y}^2 - n\bar{y}^2) \\
+                    &= 0 \\
+                \end{align*}
             \end{proof}
     \end{enumerate}
 \end{enumerate}
