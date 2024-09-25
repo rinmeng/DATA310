@@ -79,7 +79,7 @@
                     &= S_{xy} - \hat{\beta}_1 S_{xx} \\
                     &= S_{xy} - \frac{S_{xy}}{S_{xx}} S_{xx} \\
                     &= S_{xy} - S_{xy} \\
-                    &= 0 \\
+                    &= 0
                 \end{align*}
                 \[LHS = 0 = RHS\]
             \end{proof}
@@ -98,14 +98,14 @@
                     &- \sum_{i=1}^{n} (\bar{y}^2 - 2\hat{\beta_1}\bar{y}\bar{x} + \hat{\beta_1}^2\bar{x}^2 + 2\hat{\beta_1}\bar{y}x_i - 2\hat{\beta_1}^2\bar{x}x_i + \hat{\beta_1}^2 x_i^2)) \\
                     &= (n\bar{y}^2 - \hat{\beta_1}\bar{y}\bar{x} + \hat{\beta_1}\bar{y}\hat{\beta_1} x_i  \\
                     &- (\sum_{i=1}^{n} \bar{y}^2 - \sum_{i=1}^{n} 2\hat{\beta_1}\bar{y}\bar{x} + \sum_{i=1}^{n} \hat{\beta_1}^2\bar{x}^2 + \sum_{i=1}^{n}2\hat{\beta_1}\bar{y}x_i - \sum_{i=1}^{n}2\hat{\beta_1}^2\bar{x}x_i + \sum_{i=1}^{n}\hat{\beta_1}^2 x_i^2)) \\
-                    &= (n\bar{y}^2 - (n\bar{y}^2 - 2\hat{\beta_1}n\bar{y}\bar{x} + \hat{\beta_1}^2n\bar{x}^2 + 2\hat{\beta_1}n\bar{y}\bar{x} - 2\hat{\beta_1}^2n\bar{x}\bar{x} + \hat{\beta_1}^2\sum_{i=1}^{n}x_i^2)) \\
+                    &= (n\bar{y}^2 - (n\bar{y}^2 - 2\hat{\beta_1}n\bar{y}\bar{x} + \hat{\beta_1}^2n\bar{x}^2 + 2\hat{\beta_1}n\bar{y}\bar{x} - 2\hat{\beta_1}^2n\bar{x}\bar{x} + \hat{\beta_1}^2\sum_{i=1}^{n}x_i^2))
                 \end{align*}
                 
                 proof continued.
                 \begin{align*}
                     \sum_{i=1}^{n} \hat{y_i}e_i &= (n\bar{y}^2 - (n\bar{y}^2 - \hat{\beta_1}^2n\bar{x}^2 + \hat{\beta_1}^2n\bar{x}^2)) \\
                     &= (n\bar{y}^2 - n\bar{y}^2) \\
-                    &= 0 \\
+                    &= 0
                 \end{align*}
                 \[LHS = 0 = RHS\]   
             \end{proof}
@@ -123,11 +123,11 @@
             
             \[\hat{\beta_1} \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})\]
             Where $\beta_1$ is the mean of the distribution and $\frac{\sigma^2}{S_{xx}}$ is the variance.
-            
+            \begin{proof}
             LHS$\colon$
             \begin{align*}
             \hat{\beta_1} &= \frac{S_{xy}}{S_{xx}} = \frac{\sum_{i = 1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{S_{xx}} \\
-            &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})\epsilon_i}{S_{xx}} \\
+            &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})\epsilon_i}{S_{xx}}
             \end{align*}
             we know that 
             \[\epsilon_i \sim N(0, \sigma^2) \Rightarrow Var(\epsilon_i) = \sigma^2\]
@@ -135,13 +135,13 @@
             \[Var(\beta_1) = \frac{\sigma^2}{S_{xx}}\]
             so then it must also be true that,
             \begin{align*}
-            Var(\hat{\beta_1}) &= Var\left(\frac{\sum_{i = 1}^{n} (x_i - \bar{x})\epsilon_i}{S_{xx}}\right) = \frac{Var(\sum_{i = 1}^{n} (x_i - \bar{x})) Var(\epsilon_i)}{Var(S_{xx})} \\
+            Var(\hat{\beta_1}) &= Var\left(\frac{\sum_{i = 1}^{n} (x_i - \bar{x})\epsilon_i}{S_{xx}}\right) \\
+            &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})^2 Var(\epsilon_i)}{Var(S_{xx})} \\
             &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})^2 \sigma^2}{S_{xx}^2} = \frac{S_{xx} \sigma^2}{S_{xx}^2} \\
-            &= \frac{\sigma^2}{S_{xx}}\\
+            &= \frac{\sigma^2}{S_{xx}}
             \end{align*}
-            and we know that,
-            \[E[\hat{\beta_1}] = \beta_1\]
-            so then we can conclude that
+            \end{proof}
+            and we know that, $E[\hat{\beta_1}] = \beta_1$ so then we zz can conclude that
             \begin{itemize}
                 \item Variance: $Var(\hat{\beta_1}) = \frac{\sigma^2}{S_{xx}}$
                 \item Mean: $E[\hat{\beta_1}] = \beta_1$
@@ -150,6 +150,74 @@
             \[\hat{\beta_1} \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})\]
             $\therefore$ $\hat{\beta_1}$ is normally distributed with mean $\beta_1$ and variance $\frac{\sigma^2}{S_{xx}}$.
         \end{enumerate}
+    \item 
+        Since $SSE = \sum_{i=1}^{n} (y_i - \hat{y_i})^2$, we want to show that: $E[SSE] = \frac{\sigma^2}{n - 2}$.
+        \begin{proof}
+            It is given that,
+            \begin{align*}
+                SSE &= \sum_{i=1}^{n} (y_i - \hat{y_i})^2 \\
+            \end{align*}
+            we recall that $\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x_i$ and $\hat{\beta_0} = \bar{y} - \hat{\beta_1} \bar{x}$ so now we have,
+            \begin{align*}
+                \sum_{i=1}^{n} (y_i - \hat{y})^2 &= \sum_{i=1}^{n} (y_i - (\hat{\beta_0} + \hat{\beta_1}x_i))^2 \\
+                &= \sum_{i=1}^{n} (y_i - \hat{\beta_0} - \hat{\beta_1}x_i)^2 \\
+                &= \sum_{i=1}^{n} (y_i - \bar{y} + \hat{\beta_1} x_i - \hat{\beta_1}x_i)^2 \\
+                &= \sum_{i=1}^{n} ((y_i - \bar{y}) - \hat{\beta_1} (x_i - x_i))^2 \\
+                &=\sum_{i=1}^{n} (y_i-\bar{y})^2 + \hat{\beta_1}^2 \sum_{i=1}^{n} (x_i-\bar{x})^2 - 2\hat{\beta_1} \sum_{i=1}^{n} (x_i-\bar{x})(y_i-\bar{y})\\
+                &=\sum_{i=1}^{n} (y_i-\bar{y})^2 + \hat{\beta_1}^2 S_{xx} - 2\hat{\beta_1}^2 S_{xx}\\
+                &=\sum_{i=1}^{n} (y_i-\bar{y})^2 - \hat{\beta_1}^2 S_{xx}
+            \end{align*}
+            \textbf{Remark:} $y_i=\beta_0+\beta_1x_i+\epsilon_i$. Now, we have on LHS$\colon$
+            \begin{align*}
+                E[\sum_{i=1}^{n} (y_i - \hat{y})^2] &= E[\sum_{i=1}^{n} (y_i-\bar{y})^2] - E[\hat{\beta_1}^2 S_{xx}] \\
+                &= E[\sum_{i=1}^{n} (y_i-\bar{y})^2] - E[\hat{\beta_1}^2 S_{xx}]
+            \end{align*}
+            Now solving for $E[\sum_{i=1}^{n} (y_i-\bar{y})^2]$:
+            \begin{align*}
+                \sum_{i=1}^{n} (y_i-\bar{y})^2 &= \sum_{i=1}^{n} (y_i - \bar{y})(y_i - \bar{y}) \\
+                &= \sum_{i=1}^{n} (y_i^2 - 2y_i\bar{y} + \bar{y}^2) \\
+                &= \sum_{i=1}^{n}y_i^2 - \sum_{i=1}^{n}2y_i\bar{y} + \sum_{i=1}^{n} \bar{y}^2 \\
+                &= \sum_{i=1}^{n}y_i^2 - 2n\bar{y}\bar{y} + \sum_{i=1}^{n} \bar{y}^2 \\
+                &= \sum_{i=1}^{n}y_i^2 - 2n\bar{y}^2 + n\bar{y}^2 \\
+                &= \sum_{i=1}^{n}y_i^2 - n\bar{y}^2 \\
+                E[\sum_{i=1}^{n} (y_i-\bar{y})^2] &= E[\sum_{i=1}^{n} y_i^2 - n\bar{y}^2] \\
+                &= E[\sum_{i=1}^{n} y_i^2] - E[n\bar{y}^2] \\
+                &= \sum_{i=1}^{n}E[y_i^2] - E[n\bar{y}^2]
+            \end{align*}
+            \textbf{Remark:} $Var(y_i) = E[y_i^2] - (E[y_i])^2 \Leftrightarrow E[y_i^2] = Var(y_i) + (E[y_i])^2$
+            \begin{align*}
+                E[\sum_{i=1}^{n} (y_i-\bar{y})^2] &= \sum_{i=1}^{n}E[y_i^2] - E[n\bar{y}^2] \\
+                &= \sum_{i=1}^{n} (Var(y_i) + (E[y_i])^2) - E[n\bar{y}^2] \\
+                &= n(\sigma^2 + \mu^2) - E[n\bar{y}^2]
+            \end{align*}
+            Now solving for $E[n\bar{y}^2]\colon$
+            \begin{align*}
+                \bar{y} = \frac{1}{n}\sum_{i=1}^{n} y_i &\Rightarrow E[\bar{y}^2] = E[\frac{1}{n^2} (\sum_{i=1}^{n}y_i)^2] \\
+                &= E[\frac{1}{n^2} \sum_{i=1}^{n}y_i^2 + \frac{1}{n^2}\sum_{i \neq j}^{n} y_i y_j] \\
+                &= E[\frac{1}{n^2} \sum_{i=1}^{n}y_i^2] + E[\frac{1}{n^2}\sum_{i \neq j}^{n} y_i y_j] \\
+                &= \frac{1}{n^2} \sum_{i=1}^{n}E[y_i^2] + \frac{1}{n^2}\sum_{i \neq j}^{n}E[y_i y_j] \\ 
+                &= \frac{1}{n} (\sigma^2 + \mu^2) + \frac{1}{n^2} E[y_i]E[y_j] \\
+                &= \frac{1}{n} (\sigma^2 + \mu^2) + \frac{1}{n^2} n(n - 1)\mu^2 \\
+                &= \frac{1}{n} (\sigma^2 + \mu^2) + \frac{1}{n} (n - 1)\mu^2 \\
+                &= \frac{1}{n} \sigma^2 + \frac{1}{n}\mu^2 + \frac{1}{n}n\mu^2 - \frac{1}{n}\mu^2 \\
+                E[\bar{y}^2] &= \frac{\sigma^2}{n} + \mu^2 \\
+                \Rightarrow E[n\bar{y}^2] &= nE[\bar{y}^2] = n(\frac{\sigma^2}{n} + \mu^2) \\
+                &= \sigma^2 + n\mu^2
+            \end{align*}
+            Now we have:
+            \begin{align*}
+                E[\sum_{i=1}^{n} (y_i-\bar{y})^2] &= n(\sigma^2 + \mu^2) - (\sigma^2 + n\mu^2) \\
+                &= n\sigma^2 + n\mu^2 - \sigma^2 - n\mu^2 \\ 
+                &= n\sigma^2 - \sigma^2 \\ 
+                &= \sigma^2(n - 1) \\ 
+            \end{align*}
+            Now we solve for $E[\hat{\beta_1}^2 S_{xx}]$:
+            \begin{align*}
+                E[\hat{\beta_1}^2 S_{xx}] &= E[\left(\frac{S_{xy}}{S_{xx}}\right)^2 S_{xx}] \\
+                &= E[\frac{S_{xy}^2}{S_{xx}^2} S_{xx}] \\
+                &= E[\frac{S_{xy}^2}{S_{xx}}] \\
+            \end{align*}
+        \end{proof}
 \end{enumerate}
 
 \end{document}
