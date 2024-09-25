@@ -157,67 +157,16 @@
             \begin{align*}
                 SSE &= \sum_{i=1}^{n} (y_i - \hat{y_i})^2 \\
             \end{align*}
-            we recall that $\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x_i$ and $\hat{\beta_0} = \bar{y} - \hat{\beta_1} \bar{x}$ so now we have,
+            we recall that $y_i = \beta_0 + \beta_1x_i + \epsilon_i$, $\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x_i$ nd $\hat{\beta_0} = \bar{y} - \hat{\beta_1} \bar{x}$ so now we have,
             \begin{align*}
-                \sum_{i=1}^{n} (y_i - \hat{y})^2 &= \sum_{i=1}^{n} (y_i - (\hat{\beta_0} + \hat{\beta_1}x_i))^2 \\
-                &= \sum_{i=1}^{n} (y_i - \hat{\beta_0} - \hat{\beta_1}x_i)^2 \\
-                &= \sum_{i=1}^{n} (y_i - \bar{y} + \hat{\beta_1} x_i - \hat{\beta_1}x_i)^2 \\
-                &= \sum_{i=1}^{n} ((y_i - \bar{y}) - \hat{\beta_1} (x_i - x_i))^2 \\
-                &=\sum_{i=1}^{n} (y_i-\bar{y})^2 + \hat{\beta_1}^2 \sum_{i=1}^{n} (x_i-\bar{x})^2 - 2\hat{\beta_1} \sum_{i=1}^{n} (x_i-\bar{x})(y_i-\bar{y})\\
-                &=\sum_{i=1}^{n} (y_i-\bar{y})^2 + \hat{\beta_1}^2 S_{xx} - 2\hat{\beta_1}^2 S_{xx}\\
-                &=\sum_{i=1}^{n} (y_i-\bar{y})^2 - \hat{\beta_1}^2 S_{xx}
+                \sum_{i=1}^{n} (y_i - \hat{y})^2 &= \sum_{i=1}^{n} ((\beta_0 + \beta_1x_i + \epsilon_i) - (\hat{\beta_0} + \hat{\beta_1}x_i))^2 \\
+                &= \sum_{i=1}^{n} (\beta_0 + \beta_1x_i + \epsilon_i - \hat{\beta_0} - \hat{\beta_1}x_i)^2 \\
+                &= SSE = \sum_{i=1}^{n} \left[(\beta_0 - \hat{\beta}_0) + (\beta_1 - \hat{\beta}_1) x_i + \epsilon_i\right]^2 \\
+                &=SSE = \sum_{i=1}^{n} [(\beta_0 - \hat{\beta}_0)^2 + (\beta_1 - \hat{\beta}_1)^2 x_i^2 + \epsilon_i^2 \\
+                &+ 2(\beta_0 - \hat{\beta}_0)(\beta_1 - \hat{\beta}_1)x_i + 2(\beta_0 - \hat{\beta}_0)\epsilon_i + 2(\beta_1 - \hat{\beta}_1)x_i\epsilon_i] \\
+                E[SSE] &= n E[\epsilon_i^2] + n Var(\hat{\beta}_0) + n Var(\hat{\beta}_1) E[x_i^2] + n (\beta_0 - \hat{\beta}_0)^2 + n (\beta_1 - \hat{\beta}_1)^2 E[x_i^2]
             \end{align*}
-            \textbf{Remark:} $y_i=\beta_0+\beta_1x_i+\epsilon_i$. Now, we have on LHS$\colon$
-            \begin{align*}
-                E[\sum_{i=1}^{n} (y_i - \hat{y})^2] &= E[\sum_{i=1}^{n} (y_i-\bar{y})^2] - E[\hat{\beta_1}^2 S_{xx}] \\
-                &= E[\sum_{i=1}^{n} (y_i-\bar{y})^2] - E[\hat{\beta_1}^2 S_{xx}]
-            \end{align*}
-            Now solving for $E[\sum_{i=1}^{n} (y_i-\bar{y})^2]$:
-            \begin{align*}
-                \sum_{i=1}^{n} (y_i-\bar{y})^2 &= \sum_{i=1}^{n} (y_i - \bar{y})(y_i - \bar{y}) \\
-                &= \sum_{i=1}^{n} (y_i^2 - 2y_i\bar{y} + \bar{y}^2) \\
-                &= \sum_{i=1}^{n}y_i^2 - \sum_{i=1}^{n}2y_i\bar{y} + \sum_{i=1}^{n} \bar{y}^2 \\
-                &= \sum_{i=1}^{n}y_i^2 - 2n\bar{y}\bar{y} + \sum_{i=1}^{n} \bar{y}^2 \\
-                &= \sum_{i=1}^{n}y_i^2 - 2n\bar{y}^2 + n\bar{y}^2 \\
-                &= \sum_{i=1}^{n}y_i^2 - n\bar{y}^2 \\
-                E[\sum_{i=1}^{n} (y_i-\bar{y})^2] &= E[\sum_{i=1}^{n} y_i^2 - n\bar{y}^2] \\
-                &= E[\sum_{i=1}^{n} y_i^2] - E[n\bar{y}^2] \\
-                &= \sum_{i=1}^{n}E[y_i^2] - E[n\bar{y}^2]
-            \end{align*}
-            \textbf{Remark:} $Var(y_i) = E[y_i^2] - (E[y_i])^2 \Leftrightarrow E[y_i^2] = Var(y_i) + (E[y_i])^2$
-            \begin{align*}
-                E[\sum_{i=1}^{n} (y_i-\bar{y})^2] &= \sum_{i=1}^{n}E[y_i^2] - E[n\bar{y}^2] \\
-                &= \sum_{i=1}^{n} (Var(y_i) + (E[y_i])^2) - E[n\bar{y}^2] \\
-                &= n(\sigma^2 + \mu^2) - E[n\bar{y}^2]
-            \end{align*}
-            Now solving for $E[n\bar{y}^2]\colon$
-            \begin{align*}
-                \bar{y} = \frac{1}{n}\sum_{i=1}^{n} y_i &\Rightarrow E[\bar{y}^2] = E[\frac{1}{n^2} (\sum_{i=1}^{n}y_i)^2] \\
-                &= E[\frac{1}{n^2} \sum_{i=1}^{n}y_i^2 + \frac{1}{n^2}\sum_{i \neq j}^{n} y_i y_j] \\
-                &= E[\frac{1}{n^2} \sum_{i=1}^{n}y_i^2] + E[\frac{1}{n^2}\sum_{i \neq j}^{n} y_i y_j] \\
-                &= \frac{1}{n^2} \sum_{i=1}^{n}E[y_i^2] + \frac{1}{n^2}\sum_{i \neq j}^{n}E[y_i y_j] \\ 
-                &= \frac{1}{n} (\sigma^2 + \mu^2) + \frac{1}{n^2} E[y_i]E[y_j] \\
-                &= \frac{1}{n} (\sigma^2 + \mu^2) + \frac{1}{n^2} n(n - 1)\mu^2 \\
-                &= \frac{1}{n} (\sigma^2 + \mu^2) + \frac{1}{n} (n - 1)\mu^2 \\
-                &= \frac{1}{n} \sigma^2 + \frac{1}{n}\mu^2 + \frac{1}{n}n\mu^2 - \frac{1}{n}\mu^2 \\
-                E[\bar{y}^2] &= \frac{\sigma^2}{n} + \mu^2 \\
-                \Rightarrow E[n\bar{y}^2] &= nE[\bar{y}^2] = n(\frac{\sigma^2}{n} + \mu^2) \\
-                &= \sigma^2 + n\mu^2
-            \end{align*}
-            Now we have:
-            \begin{align*}
-                E[\sum_{i=1}^{n} (y_i-\bar{y})^2] &= n(\sigma^2 + \mu^2) - (\sigma^2 + n\mu^2) \\
-                &= n\sigma^2 + n\mu^2 - \sigma^2 - n\mu^2 \\ 
-                &= n\sigma^2 - \sigma^2 \\ 
-                &= \sigma^2(n - 1) \\ 
-            \end{align*}
-            Now we solve for $E[\hat{\beta_1}^2 S_{xx}]$:
-            \begin{align*}
-                E[\hat{\beta_1}^2 S_{xx}] &= E[\left(\frac{S_{xy}}{S_{xx}}\right)^2 S_{xx}] \\
-                &= E[\frac{S_{xy}^2}{S_{xx}^2} S_{xx}] \\
-                &= E[\frac{S_{xy}^2}{S_{xx}}] \\
-            \end{align*}
+            
         \end{proof}
 \end{enumerate}
-
 \end{document}
