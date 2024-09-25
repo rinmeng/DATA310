@@ -12,7 +12,7 @@
 
 \begin{enumerate}[1.]
     \item
-    \begin{enumerate}[a.]
+    \begin{enumerate}[(a)]
         \item The linear regression model can be written as, 
         \[P = \beta_0 + \beta_1 C + \epsilon\]
         where,
@@ -107,11 +107,49 @@
                     &= (n\bar{y}^2 - n\bar{y}^2) \\
                     &= 0 \\
                 \end{align*}
-                \[LHS = 0 = RHS\]
+                \[LHS = 0 = RHS\]   
             \end{proof}
             $\therefore$ It is true that the predicted values $\hat{y_i}$ is completely orthogonal to the residuals $e_i$.
     \end{enumerate}
     \item 
+        \begin{enumerate}[(a)]
+            \item It is given that:
+            \begin{itemize}
+                \item $\hat{\beta_1} = \frac{S_{xx}}{S_{xy}}$
+                \item $S_{xy} = \sum_{i = 1}^{n} (x_i - \bar{x})(y_i - \bar{y})$
+                \item $S_{xx} = \sum_{i = 1}^{n} (x_i - \bar{x})^2$
+            \end{itemize}
+            We want to show that 
+            
+            \[\hat{\beta_1} \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})\]
+            Where $\beta_1$ is the mean of the distribution and $\frac{\sigma^2}{S_{xx}}$ is the variance.
+            
+            LHS$\colon$
+            \begin{align*}
+            \hat{\beta_1} &= \frac{S_{xy}}{S_{xx}} = \frac{\sum_{i = 1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{S_{xx}} \\
+            &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})\epsilon_i}{S_{xx}} \\
+            \end{align*}
+            we know that 
+            \[\epsilon_i \sim N(0, \sigma^2) \Rightarrow Var(\epsilon_i) = \sigma^2\]
+            and that
+            \[Var(\beta_1) = \frac{\sigma^2}{S_{xx}}\]
+            so then it must also be true that,
+            \begin{align*}
+            Var(\hat{\beta_1}) &= Var\left(\frac{\sum_{i = 1}^{n} (x_i - \bar{x})\epsilon_i}{S_{xx}}\right) = \frac{Var(\sum_{i = 1}^{n} (x_i - \bar{x})) Var(\epsilon_i)}{Var(S_{xx})} \\
+            &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})^2 \sigma^2}{S_{xx}^2} = \frac{S_{xx} \sigma^2}{S_{xx}^2} \\
+            &= \frac{\sigma^2}{S_{xx}}\\
+            \end{align*}
+            and we know that,
+            \[E[\hat{\beta_1}] = \beta_1\]
+            so then we can conclude that
+            \begin{itemize}
+                \item Variance: $Var(\hat{\beta_1}) = \frac{\sigma^2}{S_{xx}}$
+                \item Mean: $E[\hat{\beta_1}] = \beta_1$
+            \end{itemize}
+            thus,
+            \[\hat{\beta_1} \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})\]
+            $\therefore$ $\hat{\beta_1}$ is normally distributed with mean $\beta_1$ and variance $\frac{\sigma^2}{S_{xx}}$.
+        \end{enumerate}
 \end{enumerate}
 
 \end{document}
