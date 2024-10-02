@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
-\usepackage{listings}
+\usepackage{changepage}
 
 \title{Assignment 1}
 \author{Rin Meng \\ Student ID: 51940633}
@@ -381,18 +381,47 @@
                 \end{tabular}
                 \[ \hat{\sigma}^2 = \frac{6.6972 + 1.5237 + 0.4204 + 6.1137 + 3.9924}{3} = \frac{18.7474}{6.2491} \simeq 6.25 \]
             \end{center}
-            \item Code:
-            \begin{lstlisting}[language=R]
+            \item
+            \begin{verbatim}
                 R <- c(30, 32, 18, 35, 12)
                 W <- c(35, 40, 20, 50, 15)
                 speedwind <- data.frame(R, W)
-            \end{lstlisting}
-            \item Code:
-            \begin{lstlisting}[language=R]
+            \end{verbatim}
+            \item Code: 
+            \begin{verbatim}
                 model <- lm(R ~ W, data = speedwind)
                 summary(model)
-            \end{lstlisting}
+            \end{verbatim}
             
+            \begin{center}
+                Summary returns:
+            \end{center}
+            \begin{adjustwidth}{-5cm}{}
+                \begin{verbatim}
+                    Call:
+                    lm(formula = R ~ W, data = speedwind)
+                    
+                    Residuals:
+                        1       2       3       4       5 
+                    2.5904  1.2410  0.6386 -2.4578 -2.0120 
+                    
+                    Coefficients:
+                                Estimate Std. Error t value Pr(>|t|)   
+                    (Intercept)  3.96386    2.99323   1.324  0.27726   
+                    W            0.66988    0.08677   7.720  0.00452 **
+                    ---
+                    Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+                    
+                    Residual standard error: 2.5 on 3 degrees of freedom
+                    Multiple R-squared:  0.9521,	Adjusted R-squared:  0.9361 
+                    F-statistic:  59.6 on 1 and 3 DF,  p-value: 0.004518
+                \end{verbatim}
+            \end{adjustwidth}
+                Our $\beta_0$ value is 3.93766 and $\beta_1$ value is 3.96386 which is relatively close, 
+                and our $\beta_1$ value is 0.6707 which is also relatively close to the value we calculated at 0.66988.
+                our residual standard error, $\sigma$ is also on point at $\sigma = \sqrt{\sigma^2} = \sqrt{6.25} = 2.5$ compared to the output.
+                Overall, our calculations are not far off from the output of the linear regression model in R.
         \end{enumerate}
 \end{enumerate}
+End of Assignment 1.
 \end{document}
