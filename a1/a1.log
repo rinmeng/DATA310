@@ -1,15 +1,15 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.16)  2 OCT 2024 01:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.2)  2 OCT 2024 01:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/agarp/DATA310/a1/a1.tex
-(c:/Users/agarp/DATA310/a1/a1.tex
+**/Users/rin/eclipse-workspace/DATA310/a1/a1.tex
+(/Users/rin/eclipse-workspace/DATA310/a1/a1.tex
 LaTeX2e <2024-06-01> patch level 2
-L3 programming layer <2024-08-30>
-(c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
+L3 programming layer <2024-09-10>
+(/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2024/02/08 v1.4n Standard LaTeX document class
-(c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size12.clo
+(/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count194
@@ -23,24 +23,24 @@ File: size12.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
 \bibindent=\dimen141
-) (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/enumerate.sty
+) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/tools/enumerate.sty
 Package: enumerate 2023/07/04 v3.00 enumerate extensions (DPC)
 \@enLab=\toks17
-) (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2024/05/23 v2.17q AMS math features
 \@mathmargin=\skip51
 
 For additional information on amsmath, use the `?' option.
-(c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+(/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
- (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+ (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks18
 \ex@=\dimen142
-)) (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+)) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen143
-) (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count268
@@ -90,7 +90,7 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \mathdisplay@stack=\toks22
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
-) (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amscls/amsthm.sty
+) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
 \thm@style=\toks23
 \thm@bodyfont=\toks24
@@ -101,49 +101,77 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@postskip=\skip55
 \thm@headsep=\skip56
 \dth@everypar=\toks28
-) (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
- (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+ (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+)) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/listings/listings.sty (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks29
+)
+\lst@mode=\count280
+\lst@gtempboxa=\box54
+\lst@token=\toks30
+\lst@length=\count281
+\lst@currlwidth=\dimen151
+\lst@column=\count282
+\lst@pos=\count283
+\lst@lostspace=\dimen152
+\lst@width=\dimen153
+\lst@newlines=\count284
+\lst@lineno=\count285
+\lst@maxwidth=\dimen154
+ (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count286
+\lst@skipnumbers=\count287
+\lst@framebox=\box55
+) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+ (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count280
-\l__pdf_internal_box=\box54
+\l__color_backend_stack_int=\count288
+\l__pdf_internal_box=\box56
 ) (./a1.aux)
 \openout1 = `a1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 11.
- (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+\c@lstlisting=\count289
+LaTeX Font Info:    Trying to load font information for U+msa on input line 12.
+ (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 11.
- (c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
+ (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
 [1
 
-{c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (65.1786pt too wide) detected at line 83
+{/Users/rin/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (65.1786pt too wide) detected at line 84
 []
  []
 
@@ -155,7 +183,7 @@ Overfull \vbox (59.99367pt too high) has occurred while \output is active []
 
 
 [3]
-Overfull \hbox (68.69365pt too wide) detected at line 102
+Overfull \hbox (68.69365pt too wide) detected at line 103
 []
  []
 
@@ -176,68 +204,28 @@ Overfull \hbox (68.69365pt too wide) detected at line 102
 [10]
 
 [11]
-Overfull \hbox (3.65518pt too wide) in paragraph at lines 316--331
+Overfull \hbox (3.65518pt too wide) in paragraph at lines 317--332
  [] 
  []
 
 
 
-[12]
+[12] (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2024/09/23 1.10c listings language file
+) (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2024/09/23 1.10c listings language file
+)
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 386.
+ (/Users/rin/Library/TinyTeX/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/bx/n' in size <12> not available
+(Font)              Font shape `OML/cmm/b/it' tried instead on input line 386.
 
-c:/Users/agarp/DATA310/a1/a1.tex:384: LaTeX Error: Environment lstlisting undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.384             \begin{lstlisting}
-                                    [language=R]
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-c:/Users/agarp/DATA310/a1/a1.tex:388: LaTeX Error: \begin{enumerate} on input line 306 ended by \end{lstlisting}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.388             \end{lstlisting}
-                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-c:/Users/agarp/DATA310/a1/a1.tex:390: LaTeX Error: Environment lstlisting undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.390             \begin{lstlisting}
-                                    [language=R]
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-c:/Users/agarp/DATA310/a1/a1.tex:393: LaTeX Error: \begin{enumerate} on input line 306 ended by \end{lstlisting}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.393             \end{lstlisting}
-                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 390--394
-
+Overfull \hbox (12.50177pt too wide) in paragraph at lines 392--393
+[][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
@@ -245,22 +233,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 390--394
 [13] (./a1.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
-L3 programming layer <2024-08-30>
+L3 programming layer <2024-09-10>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 1831 strings out of 475538
- 26634 string characters out of 5775875
- 420624 words of memory out of 5000000
- 24502 multiletter control sequences out of 15000+600000
- 566603 words of font info for 69 fonts, out of 8000000 for 9000
+ 4252 strings out of 475539
+ 57493 string characters out of 5776929
+ 630679 words of memory out of 5000000
+ 26892 multiletter control sequences out of 15000+600000
+ 567302 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,10n,65p,298b,367s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on a1.pdf (13 pages, 162197 bytes).
+ 56i,10n,65p,312b,2199s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/rin/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1200.600pk> </Users/rin/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on a1.pdf (13 pages, 170764 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 74 compressed objects within 1 object stream
+ 127 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

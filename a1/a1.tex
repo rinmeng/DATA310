@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
+\usepackage{listings}
 
 \title{Assignment 1}
 \author{Rin Meng \\ Student ID: 51940633}
@@ -380,13 +381,13 @@
                 \end{tabular}
                 \[ \hat{\sigma}^2 = \frac{6.6972 + 1.5237 + 0.4204 + 6.1137 + 3.9924}{3} = \frac{18.7474}{6.2491} \simeq 6.25 \]
             \end{center}
-            \item
+            \item Code:
             \begin{lstlisting}[language=R]
                 R <- c(30, 32, 18, 35, 12)
                 W <- c(35, 40, 20, 50, 15)
                 speedwind <- data.frame(R, W)
             \end{lstlisting}
-            \item 
+            \item Code:
             \begin{lstlisting}[language=R]
                 model <- lm(R ~ W, data = speedwind)
                 summary(model)
