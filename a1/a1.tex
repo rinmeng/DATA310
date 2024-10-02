@@ -282,8 +282,116 @@
             \[ E[R|W = x] = \beta_0 + \beta_1 x \Leftrightarrow E[\epsilon] = 0\]
             \item The variance of $R$ given that $W = x$ is:
             \[ Var[R|W = x] = Var(\beta_0 + \beta_1 x + \epsilon|x) = \sigma^2 \]
+            \item Given that W is a random variable with mean $\mu_W$ and variance $\sigma_W^2$,
+            \begin{enumerate}[i.]
+                \item The unconditional expected value of $R$ is:
+                \[ E[R] =  E[\beta_0 + \beta_1 W + \epsilon] = \beta_0 + \beta_1 E[W] + E[\epsilon] = \beta_0 + \beta_1 \mu_W \]
+                Here, $\mu_W$ is the mean of the wind speed. This contrasts with part (c) because in (c) we are looking for the expected value of
+                $R$ given $W = x$, and here we are looking for expected value of $R$ given that $W$ is a random variable.
+                \item The unconditional variance of $R$ is:
+                \[ Var[R] = Var[\beta_0 + \beta_1 W + \epsilon] = Var[\beta_0] + \beta_1^2 Var[W] + Var[\epsilon] \]
+                \[= \beta_1^2 \sigma_W^2 + \sigma^2 \]
+                This contrasts with part (d) because in (d) we are looking for the specific condition where speed 
+                 is fixed at $x$ and which equates to $\sigma^2$. Now, we are including all of the variability of $W$ instead of fixing it to a particular value.
+            \end{enumerate}
+            \item If the rate of spread of a wildfire $W$ is linearly related to the square root of wind speed $\sqrt{W}$,
+            then the model will intuitively be:
+            \[ R = \beta_0 + \beta_1 \sqrt{W} + \epsilon\]
+            
         \end{enumerate}
+        \item 
+        From Question 6, we have, \
+        \[R : \{ 30, 32, 18, 35, 12 \} \]
+        \[W : \{ 35, 40, 20, 50, 15 \} \]
+        \begin{enumerate}[(a)]
+            \item 
+            \begin{align*}
+                \hat{\beta_1} &= \frac{S_{xy}}{S_{xx}} = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2} \\
+                &= \frac{\sum_{i=1}^{n} (W_i - \bar{W})(R_i - \bar{R})}{\sum_{i=1}^{n} (W_i - \bar{W})^2} \\
+                \bar{R} &= \frac{30 + 32 + 18 + 35 + 12}{5} = 25.4 \\
+                \bar{W} &= \frac{35 + 40 + 20 + 50 + 15}{5} = 32
+            \end{align*}
+            Calculating $S_{xy}$:
+            \begin{center}
+                \begin{tabular}{|c|c|c|c|c|}
+                    \hline
+                    $W_i$ & $R_i$ & $W_i - \bar{W}$ & $R_i - \bar{R}$ & $(W_i - \bar{W})(R_i - \bar{R})$\\
+                    \hline
+                    35 & 30 & $35 - 32 = 3$ & $30 - 25.4 = 4.6$ & $3 \cdot 4.6 = 13.8$ \\
+                    \hline
+                    40 & 32 & $40 - 32 = 8$ & $32 - 25.4 = 6.6$ & $8 \cdot 6.6 = 52.8$ \\
+                    \hline
+                    20 & 18 & $20 - 32 = -12$ & $18 - 25.4 = -7.4$ & $-12 \cdot -7.4 = 88.8$ \\
+                    \hline
+                    50 & 35 & $50 - 32 = 18$ & $35 - 25.4 = 9.6$ & $18 \cdot 9.6 = 172.8$ \\
+                    \hline
+                    15 & 12 & $15 - 32 = -17$ & $12 - 25.4 = -13.4$ & $-17 \cdot -13.4 = 227.8$ \\
+                    \hline
+                \end{tabular}
+                \[ S_{xy} = 13.8 + 52.8 + 88.8 + 172.8 + 227.8 = 556 \]
+            \end{center}
+            Calculating $S_{xx}$:
+            \begin{center} 
+                \begin{tabular}{|c|c|c|c|}
+                    \hline
+                    $W_i$ & $W_i - \bar{W}$ & $(W_i - \bar{W})^2$\\
+                    \hline
+                    35 & $35 - 32 = 3$ & $3^2 = 9$ \\
+                    \hline
+                    40 & $40 - 32 = 8$ & $8^2 = 64$ \\
+                    \hline
+                    20 & $20 - 32 = -12$ & $(-12)^2 = 144$ \\
+                    \hline
+                    50 & $50 - 32 = 18$ & $18^2 = 324$ \\
+                    \hline
+                    15 & $15 - 32 = -17$ & $(-17)^2 = 289$ \\
+                    \hline
+                \end{tabular}
+                \[ S_{xx} = 9 + 64 + 144 + 324 + 289 = 830 \]
+            \end{center}
+            Finally, we have:
+            \[ \hat{\beta_1} = \frac{556}{830} = 0.6707 \]
+            \item Recall from (a) that $\bar{R} = 25.4$ and $\bar{W} = 32$. We can now calculate $\hat{\beta_0}$:
+            \begin{align*}
+                \hat{\beta_0} &= \bar{R} - \hat{\beta_1} \bar{W} \\
+                &= 25.4 - 0.6707 \cdot 32 \\
+                &= 25.4 - 21.47 \\
+                &= 3.9376
+            \end{align*}
+            \item 
+            \[ \hat{\sigma}^2 =  \frac{1}{n-2} \sum (y_i - \hat{y_i})^2 = \frac{1}{5-2} \sum (R_i - \hat{R_i})^2 \]
+            With the values, our model is now:
+            \[ \hat{R} = 3.9376 + 0.6707W \]
+            \begin{center}
+                \begin{tabular}{|c|c|c|c|c|c|}
+                    \hline
+                    $W_i$ & $R_i$ & $\hat{R_i}$ & $R_i - \hat{R_i}$ & $(R_i - \hat{R_i})^2$\\
+                    \hline
+                    35 & 30 & 27.4121 & 2.5879 & 6.6972 \\
+                    \hline
+                    40 & 32 & 30.7656 & 1.2344 & 1.5237 \\
+                    \hline
+                    20 & 18 & 17.3516 & 0.6484 & 0.4204 \\
+                    \hline
+                    50 & 35 & 37.4726 & -2.4726 & 6.1137 \\
+                    \hline
+                    15 & 12 & 13.9981 & -1.9981 & 3.9924 \\
+                    \hline
+                \end{tabular}
+                \[ \hat{\sigma}^2 = \frac{6.6972 + 1.5237 + 0.4204 + 6.1137 + 3.9924}{3} = \frac{18.7474}{6.2491} \simeq 6.25 \]
+            \end{center}
+            \item
+            \begin{lstlisting}[language=R]
+                R <- c(30, 32, 18, 35, 12)
+                W <- c(35, 40, 20, 50, 15)
+                speedwind <- data.frame(R, W)
+            \end{lstlisting}
+            \item 
+            \begin{lstlisting}[language=R]
+                model <- lm(R ~ W, data = speedwind)
+                summary(model)
+            \end{lstlisting}
             
-            
+        \end{enumerate}
 \end{enumerate}
 \end{document}
