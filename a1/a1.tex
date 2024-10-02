@@ -122,23 +122,32 @@
                 \item $\bar{y} = \beta_0 + \beta_1 \bar{x}$
             \end{itemize}
             We want to show that 
-            
             \[\hat{\beta_1} \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})\]
             Where $\beta_1$ is the mean of the distribution and $\frac{\sigma^2}{S_{xx}}$ is the variance.
             \begin{proof}
-            LHS$\colon$
-            \begin{align*}
-                \hat{\beta_1} &= \frac{S_{xy}}{S_{xx}} = \frac{\sum_{i = 1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{S_{xx}} \\
-                &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})(\hat{\beta_0} + \hat{\beta_1} x_i + \epsilon_i - \beta_0 - \beta_1 \bar{x})}{S_{xx}} \\
-            \end{align*}
-            
+            Let $k_i = \frac{x_i - \bar{x}}{S_{xx}}$ then we have
+            \[ \hat{\beta_1} = \sum k_i (y_i - \bar{y})\]
+            \[ E[\hat{\beta_1}] = E\left[ \sum k_i (y_i - \bar{y}) \right] \]
+            \[=  \sum k_i E[(y_i - \bar{y})] \]
+            \[=  \sum k_i E[(\hat{\beta_0} + \hat{\beta_1} x_i + \epsilon_i - \beta_0 - \beta_1 \bar{x})] \]
+            \[=  \sum k_i (E[\hat{\beta_0}] + E[\hat{\beta_1} x_i] + E[\epsilon_i] - E[\beta_0] - E[\beta_1 \bar{x}]) \]
+            \[=  \sum k_i (0 + \beta_1 x_i + 0 - 0 - \beta_1 \bar{x}) \]
+            \[=  \sum k_i (\beta_1 x_i - \beta_1 \bar{x}) \]
+            \[=  \beta_1 \sum k_i (x_i - \bar{x}) \]
+            \[=  \beta_1 \sum \frac{x_i - \bar{x}}{S_{xx}} (x_i - \bar{x}) \]
+            \[=  \beta_1 \sum \frac{(x_i - \bar{x})^2}{(x_i - \bar{x})^2}  \]
+            \[=  \beta_1 \]
+            $\therefore E[\hat{\beta_1}] = \beta_1 $
             \end{proof}
-        
+            Using $k_i$ from earlier, we can proof that $Var[\hat{\beta_1}] = \frac{\sigma^2}{S_{xx}}$ 
+            \[ Var[\hat{\beta_1}] = Var[\sum k_i (y_i - \bar{y})] \]
+            \[ Var[\hat{\beta_1}] = \sum Var[k_i (y_i - \bar{y})] \]
+            \[ Var[\hat{\beta_1}] = \sum k_i^2 Var[(y_i - \bar{y})] \]
     \end{enumerate}
     \item Given the model: 
         \[ y_i = \beta_1 + \beta_2 i + \epsilon_i \]
         \begin{enumerate}[(a)]
-            \item We want to derive the least-squares estimators for $\beta_1$ and $\beta_2$.
+            \item Let us derive the least-squares estimators for $\beta_1$ and $\beta_2$.
             \begin{align*}
                 S(\beta_1, \beta_2) &= \sum  (y_i - \beta_1 x_i - \beta_2 i)^2 \\
                 \frac{\delta S}{\delta \beta_1} &= -2 \sum  (y_i - \beta_1 x_i - \beta_2 i)x_i = 0 \\
@@ -211,6 +220,44 @@
             \end{align*}
             Derived from, Question 3b.
             
+            \item 
+            \begin{proof} We want to show that $MSE$ is an unbiased estimator $\sigma^2$ then we want to show that:
+                \[E[MSE] = E\left[\frac{1}{n-1} \sum (y_i - \bar{y})^2 \right]\]
+                so then we can start by recalling the model,
+                \[ y_i = \alpha + \epsilon_i \]
+                then it is true that the sample mean is,
+                \[ \bar{y} = \alpha + \bar{\epsilon}\]
+                then, $y_i - \bar{y}$ can be rewritten as,
+                \[ y_i - \bar{y} = (\alpha + \epsilon_i) - (\alpha + \bar{\epsilon}) = \epsilon_i - \bar{\epsilon}\]
+                Now, we have
+                \begin{align*}
+                    E[MSE] &= E\left[\frac{1}{n-1} \sum (\epsilon_i - \bar{\epsilon})^2 \right] \\ 
+                    &= \frac{1}{n-1} E\left[(\sum \epsilon_i^2 - \sum \bar{\epsilon}^2) \right] \\ 
+                    &= \frac{1}{n-1} (\sum E[\epsilon_i^2] - E[n\bar{\epsilon}^2] )
+                \end{align*}
+                We know that 
+                \[E[\epsilon_i] = 0 \Rightarrow E[\epsilon_i^2] = Var[\epsilon_i] + E[\epsilon_i]^2 = \sigma^2\]
+                \[\sum E[\epsilon_i] = n\sigma^2\]
+                now we find that,
+                \begin{align*}
+                    E[n\bar{\epsilon}^2] &= nE[\bar{\epsilon}^2] \\
+                    &\Rightarrow E[\bar{\epsilon}^2] = Var[\bar{\epsilon}] + E[\bar{\epsilon}]^2 \\
+                    &= \frac{\sigma^2}{n}\\
+                    &\Leftrightarrow Var[\bar{\epsilon}] = Var[\frac{1}{n} \sum \epsilon_i] \\
+                    &= \frac{1}{n^2} \sum Var[\epsilon_i] \\
+                    &= \frac{1}{n^2} \sum \sigma^2 \\
+                    &= \frac{1}{n^2} n \sigma^2 = \frac{\sigma^2}{n}  \\
+                    &\Leftrightarrow E[\bar{\epsilon}]^2 = E[\frac{1}{n} \sum e_i]^2 \\ 
+                    &= (\frac{1}{n} \sum E[e_i])^2 \\ 
+                    &= (\frac{1}{n} \cdot 0)^2  = 0 \\ 
+                    E[n\bar{\epsilon}^2] &= n \cdot \frac{\sigma^2}{n} = \sigma^2
+                \end{align*}
+                so then finally we have:
+                \[E[MSE] = \frac{1}{n-1}(n\sigma^2 - \sigma^2) \]
+                \[= \frac{1}{n-1} (n-1) \sigma^2 \]
+                \[=  \sigma^2\]
+                $\therefore$ $MSE$ is an unbiased estimator for $\sigma^2$.
+            \end{proof}
         \end{enumerate}
 \end{enumerate}
 \end{document}
