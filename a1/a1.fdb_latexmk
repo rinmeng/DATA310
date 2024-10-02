@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1727851233.29002 "c:/Users/agarp/DATA310/a1/a1.tex" "a1.pdf" "a1" 1727851233.48037 0
-  "a1.aux" 1727851233 33 06c322e1d88c4778ac780ba5e7d05c77 "pdflatex"
-  "a1.tex" 1727851233 17380 e6f00fafbdb87b12b490ffcf1fc6d6e0 ""
+["pdflatex"] 1727852473.30745 "c:/Users/agarp/DATA310/a1/a1.tex" "a1.pdf" "a1" 1727852473.49944 0
+  "a1.aux" 1727852473 33 cd8a9e253be16178be412705367a589a "pdflatex"
+  "a1.tex" 1727852473 18491 5d2d9dce5c064699267cf731842c39bf ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1726521896 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1726521896 1004 54797486969f23fa377b128694d548df ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1726521896 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -54,7 +54,7 @@
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk" 1727136313 14040 bf161667fe76d1e115f62610c541a22c ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-var/web2c/pdftex/pdflatex.fmt" 1726521944 1901795 1038a42a3e3f82a7ffcfa8c4175bc416 ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf.cnf" 1726521909 956 26ec9cd9a5edcbea822f9dddc1187176 ""
-  "c:/Users/agarp/DATA310/a1/a1.tex" 1727851233 17380 e6f00fafbdb87b12b490ffcf1fc6d6e0 ""
+  "c:/Users/agarp/DATA310/a1/a1.tex" 1727852473 18491 5d2d9dce5c064699267cf731842c39bf ""
   (generated)
   "a1.aux"
   "a1.log"

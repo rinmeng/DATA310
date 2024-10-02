@@ -219,45 +219,71 @@
                 \sigma^2 &= \frac{\sum \epsilon^2}{n-2}
             \end{align*}
             Derived from, Question 3b.
-            
-            \item 
-            \begin{proof} We want to show that $MSE$ is an unbiased estimator $\sigma^2$ then we want to show that:
-                \[E[MSE] = E\left[\frac{1}{n-1} \sum (y_i - \bar{y})^2 \right]\]
-                so then we can start by recalling the model,
-                \[ y_i = \alpha + \epsilon_i \]
-                then it is true that the sample mean is,
-                \[ \bar{y} = \alpha + \bar{\epsilon}\]
-                then, $y_i - \bar{y}$ can be rewritten as,
-                \[ y_i - \bar{y} = (\alpha + \epsilon_i) - (\alpha + \bar{\epsilon}) = \epsilon_i - \bar{\epsilon}\]
-                Now, we have
-                \begin{align*}
-                    E[MSE] &= E\left[\frac{1}{n-1} \sum (\epsilon_i - \bar{\epsilon})^2 \right] \\ 
-                    &= \frac{1}{n-1} E\left[(\sum \epsilon_i^2 - \sum \bar{\epsilon}^2) \right] \\ 
-                    &= \frac{1}{n-1} (\sum E[\epsilon_i^2] - E[n\bar{\epsilon}^2] )
-                \end{align*}
-                We know that 
-                \[E[\epsilon_i] = 0 \Rightarrow E[\epsilon_i^2] = Var[\epsilon_i] + E[\epsilon_i]^2 = \sigma^2\]
-                \[\sum E[\epsilon_i] = n\sigma^2\]
-                now we find that,
-                \begin{align*}
-                    E[n\bar{\epsilon}^2] &= nE[\bar{\epsilon}^2] \\
-                    &\Rightarrow E[\bar{\epsilon}^2] = Var[\bar{\epsilon}] + E[\bar{\epsilon}]^2 \\
-                    &= \frac{\sigma^2}{n}\\
-                    &\Leftrightarrow Var[\bar{\epsilon}] = Var[\frac{1}{n} \sum \epsilon_i] \\
-                    &= \frac{1}{n^2} \sum Var[\epsilon_i] \\
-                    &= \frac{1}{n^2} \sum \sigma^2 \\
-                    &= \frac{1}{n^2} n \sigma^2 = \frac{\sigma^2}{n}  \\
-                    &\Leftrightarrow E[\bar{\epsilon}]^2 = E[\frac{1}{n} \sum e_i]^2 \\ 
-                    &= (\frac{1}{n} \sum E[e_i])^2 \\ 
-                    &= (\frac{1}{n} \cdot 0)^2  = 0 \\ 
-                    E[n\bar{\epsilon}^2] &= n \cdot \frac{\sigma^2}{n} = \sigma^2
-                \end{align*}
-                so then finally we have:
-                \[E[MSE] = \frac{1}{n-1}(n\sigma^2 - \sigma^2) \]
-                \[= \frac{1}{n-1} (n-1) \sigma^2 \]
-                \[=  \sigma^2\]
-                $\therefore$ $MSE$ is an unbiased estimator for $\sigma^2$.
-            \end{proof}
+        \end{enumerate}[(a)]
+    
+        \item 
+        \begin{proof} We want to show that $MSE$ is an unbiased estimator $\sigma^2$ then we want to show that:
+            \[E[MSE] = E\left[\frac{1}{n-1} \sum (y_i - \bar{y})^2 \right] = \sigma^2 \]
+            so then we can start by recalling the model,
+            \[ y_i = \alpha + \epsilon_i \]
+            then it is true that the sample mean is,
+            \[ \bar{y} = \alpha + \bar{\epsilon}\]
+            then, $y_i - \bar{y}$ can be rewritten as,
+            \[ y_i - \bar{y} = (\alpha + \epsilon_i) - (\alpha + \bar{\epsilon}) = \epsilon_i - \bar{\epsilon}\]
+            Now, we have
+            \begin{align*}
+                E[MSE] &= E\left[\frac{1}{n-1} \sum (\epsilon_i - \bar{\epsilon})^2 \right] \\ 
+                &= \frac{1}{n-1} E\left[(\sum \epsilon_i^2 - \sum \bar{\epsilon}^2) \right] \\ 
+                &= \frac{1}{n-1} (\sum E[\epsilon_i^2] - E[n\bar{\epsilon}^2] )
+            \end{align*}
+            We know that 
+            \[E[\epsilon_i] = 0 \Rightarrow E[\epsilon_i^2] = Var[\epsilon_i] + E[\epsilon_i]^2 = \sigma^2\]
+            \[\sum E[\epsilon_i] = n\sigma^2\]
+            now we find that,
+            \begin{align*}
+                E[n\bar{\epsilon}^2] &= nE[\bar{\epsilon}^2] \\
+                &\Rightarrow E[\bar{\epsilon}^2] = Var[\bar{\epsilon}] + E[\bar{\epsilon}]^2 \\
+                &= \frac{\sigma^2}{n}\\
+                &\Leftrightarrow Var[\bar{\epsilon}] = Var[\frac{1}{n} \sum \epsilon_i] \\
+                &= \frac{1}{n^2} \sum Var[\epsilon_i] \\
+                &= \frac{1}{n^2} \sum \sigma^2 \\
+                &= \frac{1}{n^2} n \sigma^2 = \frac{\sigma^2}{n}  \\
+                &\Leftrightarrow E[\bar{\epsilon}]^2 = E[\frac{1}{n} \sum e_i]^2 \\ 
+                &= (\frac{1}{n} \sum E[e_i])^2 \\ 
+                &= (\frac{1}{n} \cdot 0)^2  = 0 \\ 
+                E[n\bar{\epsilon}^2] &= n \cdot \frac{\sigma^2}{n} = \sigma^2
+            \end{align*}
+            so then finally we have:
+            \[E[MSE] = \frac{1}{n-1}(n\sigma^2 - \sigma^2) \]
+            \[= \frac{1}{n-1} (n-1) \sigma^2 \]
+            \[=  \sigma^2\]
+            $\therefore$ $MSE$ is an unbiased estimator for $\sigma^2$.
+        \end{proof}
+
+        \item 
+        \begin{enumerate}[(a)]
+            \item The linear regression model can be written as,
+            \[ R = \beta_0 + \beta_1 W + \epsilon\]
+            Where,
+            \begin{itemize}
+                \item $R$ is the rate of the spread of a wildfire m/s
+                \item $W$ is the wind speed km/h
+                \item $\beta_0$ is the the rate of spread when $W = 0$
+                \item $\beta_1$ is the slope the rate of spread increases with one-unit wind speed
+                \item $\epsilon$ is the error term
+            \end{itemize}
+            \item Assumptions that is made on the error term $\epsilon$ are:
+            \begin{enumerate}[i.]
+            \item \textbf{Independence:} The error term $\epsilon$ is independent of $W$
+            \item $E[\epsilon] = 0$
+            \item $Var[\epsilon] = \sigma^2$
+            \end{enumerate}
+            \item The expected value of $R$ given that $W = x$ is:
+            \[ E[R|W = x] = \beta_0 + \beta_1 x \Leftrightarrow E[\epsilon] = 0\]
+            \item The variance of $R$ given that $W = x$ is:
+            \[ Var[R|W = x] = Var(\beta_0 + \beta_1 x + \epsilon|x) = \sigma^2 \]
         \end{enumerate}
+            
+            
 \end{enumerate}
 \end{document}
