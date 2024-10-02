@@ -149,24 +149,9 @@
             thus,
             \[\hat{\beta_1} \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})\]
             $\therefore$ $\hat{\beta_1}$ is normally distributed with mean $\beta_1$ and variance $\frac{\sigma^2}{S_{xx}}$.
-        \end{enumerate}
-    \item 
-        Since $SSE = \sum_{i=1}^{n} (y_i - \hat{y_i})^2$, we want to show that: $E[SSE] = \frac{\sigma^2}{n - 2}$.
-        \begin{proof}
-            It is given that,
-            \begin{align*}
-                SSE &= \sum_{i=1}^{n} (y_i - \hat{y_i})^2 \\
-            \end{align*}
-            we recall that $y_i = \beta_0 + \beta_1x_i + \epsilon_i$, $\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x_i$ nd $\hat{\beta_0} = \bar{y} - \hat{\beta_1} \bar{x}$ so now we have,
-            \begin{align*}
-                \sum_{i=1}^{n} (y_i - \hat{y})^2 &= \sum_{i=1}^{n} ((\beta_0 + \beta_1x_i + \epsilon_i) - (\hat{\beta_0} + \hat{\beta_1}x_i))^2 \\
-                &= \sum_{i=1}^{n} (\beta_0 + \beta_1x_i + \epsilon_i - \hat{\beta_0} - \hat{\beta_1}x_i)^2 \\
-                &= SSE = \sum_{i=1}^{n} \left[(\beta_0 - \hat{\beta}_0) + (\beta_1 - \hat{\beta}_1) x_i + \epsilon_i\right]^2 \\
-                &=SSE = \sum_{i=1}^{n} [(\beta_0 - \hat{\beta}_0)^2 + (\beta_1 - \hat{\beta}_1)^2 x_i^2 + \epsilon_i^2 \\
-                &+ 2(\beta_0 - \hat{\beta}_0)(\beta_1 - \hat{\beta}_1)x_i + 2(\beta_0 - \hat{\beta}_0)\epsilon_i + 2(\beta_1 - \hat{\beta}_1)x_i\epsilon_i] \\
-                E[SSE] &= n E[\epsilon_i^2] + n Var(\hat{\beta}_0) + n Var(\hat{\beta}_1) E[x_i^2] + n (\beta_0 - \hat{\beta}_0)^2 + n (\beta_1 - \hat{\beta}_1)^2 E[x_i^2]
-            \end{align*}
+        \item 
+            Since $SSE = \sum_{i=1}^{n} (y_i - \hat{y_i})^2$, we want to show that: $E[SSE] = \frac{\sigma^2}{n - 2}$.
             
-        \end{proof}
+    \end{enumerate}
 \end{enumerate}
 \end{document}
