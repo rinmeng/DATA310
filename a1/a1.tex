@@ -137,15 +137,22 @@
             \[=  \beta_1 \sum k_i (x_i - \bar{x}) \]
             \[=  \beta_1 \sum \frac{x_i - \bar{x}}{S_{xx}} (x_i - \bar{x}) \]
             \[=  \beta_1 \sum \frac{(x_i - \bar{x})^2}{(x_i - \bar{x})^2}  \]
-            \[=  \beta_1 \]
-            $\therefore E[\hat{\beta_1}] = \beta_1 $
+            \[E[\hat{\beta_1}] =  \beta_1 \]
+            Now we can proof that $Var[\hat{\beta_1}] = \frac{\sigma^2}{S_{xx}}$ 
+            \[Var[\hat{\beta_1}] = Var[\frac{\sum  (x_i - \bar{x})(y_i - \bar{y})}{\sum  (x_i - \bar{x})^2}] \]
+            \[= Var[\frac{\sum  (x_i - \bar{x})(\hat{\beta_0} + \hat{\beta_1} x_i + \epsilon_i - \bar{y})}{\sum  (x_i - \bar{x})^2}] \]
+            \[= Var[\frac{\sum  (x_i - \bar{x})\hat{\beta_0} + \sum  (x_i - \bar{x})\hat{\beta_1} x_i + \sum  (x_i - \bar{x})\epsilon_i - \sum  (x_i - \bar{x})\bar{y}}{\sum  (x_i - \bar{x})^2}] \]
+            \[= Var[\frac{\hat{\beta_0} \sum  (x_i - \bar{x}) + \hat{\beta_1} \sum  (x_i - \bar{x}) x_i + \sum  (x_i - \bar{x})\epsilon_i - \bar{y} \sum  (x_i - \bar{x})}{\sum  (x_i - \bar{x})^2}] \]
+            \[= Var[\frac{\hat{\beta_0} \cdot 0 + \hat{\beta_1} \cdot 0 + \sum  (x_i - \bar{x})\epsilon_i - \bar{y} \cdot 0}{\sum  (x_i - \bar{x})^2}] \]
+            \[= Var[\frac{\sum (x_i - \bar{x}) \epsilon_i}{S_{xx}}] \]
+            \[= \frac{(x_i - \bar{x})^2}{S_{xx}^2} Var[\epsilon_i]\]
+            \[= \frac{S_{xx}}{S_{xx}^2} \sigma^2\]
+            \[ Var[\hat{\beta_1}]= \frac{\sigma^2}{S_{xx}} \]
             \end{proof}
-            Using $k_i$ from earlier, we can proof that $Var[\hat{\beta_1}] = \frac{\sigma^2}{S_{xx}}$ 
-            \[ Var[\hat{\beta_1}] = Var[\sum k_i (y_i - \bar{y})] \]
-            \[ Var[\hat{\beta_1}] = \sum Var[k_i (y_i - \bar{y})] \]
-            \[ Var[\hat{\beta_1}] = \sum k_i^2 Var[(y_i - \bar{y})] \]
-    \end{enumerate}
-    \item Given the model: 
+        \end{enumerate}
+        $\therefore$ We can conclude that because, the $E[\hat{\beta_1}] = \beta_1$ and $Var[\hat{\beta_1}]= \frac{\sigma^2}{S_{xx}}$,
+        We can safely 
+    \item Given the model:
         \[ y_i = \beta_1 + \beta_2 i + \epsilon_i \]
         \begin{enumerate}[(a)]
             \item Let us derive the least-squares estimators for $\beta_1$ and $\beta_2$.
@@ -220,7 +227,7 @@
                 \sigma^2 &= \frac{\sum \epsilon^2}{n-2}
             \end{align*}
             Derived from, Question 3b.
-        \end{enumerate}[(a)]
+        \end{enumerate}
     
         \item 
         \begin{proof} We want to show that $MSE$ is an unbiased estimator $\sigma^2$ then we want to show that:
