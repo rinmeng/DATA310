@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.2)  2 OCT 2024 16:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.2)  2 OCT 2024 16:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -170,14 +170,14 @@ Overfull \hbox (68.69365pt too wide) detected at line 103
 [5]
 
 [6]
-Overfull \hbox (41.05579pt too wide) detected at line 178
+Overfull \hbox (41.05579pt too wide) detected at line 177
 []
  []
 
 
 
 [7]
-Overfull \hbox (46.11089pt too wide) detected at line 222
+Overfull \hbox (46.11089pt too wide) detected at line 221
 []
  []
 
@@ -198,7 +198,7 @@ Overfull \hbox (46.11089pt too wide) detected at line 222
 [14]
 
 [15]
-Overfull \hbox (3.65518pt too wide) in paragraph at lines 410--425
+Overfull \hbox (3.65518pt too wide) in paragraph at lines 409--424
  [] 
  []
 
@@ -207,7 +207,7 @@ Overfull \hbox (3.65518pt too wide) in paragraph at lines 410--425
 [16]
 
 [17]
-Overfull \hbox (9.98888pt too wide) in paragraph at lines 511--511
+Overfull \hbox (9.98888pt too wide) in paragraph at lines 510--510
  []                    \OT1/cmtt/m/n/12 Signif. codes:  0 `***' 0.001 `**' 0.01 `*' 0.05 `.' 0.1 ` ' 1[] 
  []
 
@@ -228,7 +228,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  56i,13n,65p,312b,525s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/rin/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></Users/rin/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on a1.pdf (18 pages, 182066 bytes).
+Output written on a1.pdf (18 pages, 182065 bytes).
 PDF statistics:
  137 PDF objects out of 1000 (max. 8388607)
  87 compressed objects within 1 object stream
