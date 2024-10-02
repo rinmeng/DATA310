@@ -149,9 +149,95 @@
             \[= \frac{S_{xx}}{S_{xx}^2} \sigma^2\]
             \[ Var[\hat{\beta_1}]= \frac{\sigma^2}{S_{xx}} \]
             \end{proof}
+            $\therefore$ We can conclude that because, the $E[\hat{\beta_1}] = \beta_1$ and $Var[\hat{\beta_1}]= \frac{\sigma^2}{S_{xx}}$,
+        We can safely say that $\hat{\beta_1} \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})$
+            \item Since $SSE = \sum (y_i - \hat{y_i})^2$, we want to show that $E[SSE] = (n - 2)\sigma^2$.
+            \textbf{Remark:} $\hat{y_i} = \hat{\beta_0} + \hat{\beta_1} x_i$ and 
+            $\hat{\beta_0} = \bar{y} - \hat{\beta_1} \bar{x}$ and 
+            $\hat{\beta_1} = \frac{S_{xy}}{S_{xx}} \Rightarrow S_{xy} = \hat{\beta_1}S_{xx}$
+            \begin{proof}
+                \begin{align*}
+                    SSE &= \sum (y_i - \hat{y_i})^2 = \sum \epsilon_i^2\\
+                    &= \sum (y_i - \hat{\beta_0} + \hat{\beta_1} x_i)^2 \\
+                    &= \sum (y_i - (\bar{y} - \hat{\beta_1} \bar{x}) + \hat{\beta_1} x_i)^2 \\
+                    &= \sum (y_i - \bar{y} + \hat{\beta_1} \bar{x} + \hat{\beta_1} x_i)^2 \\
+                    &= \sum (y_i - \bar{y} - \hat{\beta_1} (\bar{x} - x_i))^2 \\
+                    &= \sum [(y_i - \bar{y})^2 + \hat{\beta_1}^2 (\bar{x} - x_i)^2 - 2(y_i - \bar{y})\hat{\beta_1}(x_i - \bar{x})] \\
+                    &= \sum(y_i - \bar{y})^2 + \hat{\beta_1}^2 \sum(\bar{x} - x_i)^2 - 2\hat{\beta_1}\sum(y_i - \bar{y})(x_i - \bar{x}) \\
+                    &= S_{yy} + \hat{\beta_1}^2 S_{xx} - 2 \hat{\beta_1} S_{xy} \\
+                    &= S_{yy} + \hat{\beta_1}^2 S_{xx} - 2 \hat{\beta_1}(\hat{\beta_1}S_{xx})\\
+                    &= S_{yy} + \hat{\beta_1}^2 S_{xx} - 2 \hat{\beta_1}^2 S_{xx}\\
+                    SSE &= S_{yy} - \hat{\beta_1}^2 S_{xx} \\
+                    E[SSE] &= E[S_{yy}] - E[\hat{\beta_1}^2 S_{xx}] \\
+                    \text{Solving for $E[S_{yy}]$} &:\\
+                    E[S_{yy}] &= E[\sum (y_i - \bar{y})^2] \\
+                    &= E[\sum (y_i^2 + \bar{y}^2 - 2y_i\bar{y})] \\
+                    &= E[\sum y_i^2 + \sum \bar{y}^2 - 2\sum y_i\bar{y}] \\
+                    &= E[\sum y_i^2 + n \bar{y}^2 - 2 \bar{y} \sum y_i] \\
+                    &= E[\sum y_i^2 + n \bar{y}^2 - 2 n \bar{y} \bar{y}]
+                \end{align*}
+                Proof con't:
+                \begin{align*}
+                    \text{Solving for $E[S_{yy}]$} &:\\
+                    &= E[\sum y_i^2 + n \bar{y}^2 - 2 n \bar{y}^2] \\
+                    &= E[\sum y_i^2 - n \bar{y}^2] \\
+                    E[S_{yy}] &= E[\sum y_i^2] - n E[\bar{y}^2] \\
+                    \text{Solving for $E[\sum y_i^2]$} &: \\
+                    \because y_i &= \beta_0 + \beta_1 x_i + \epsilon_i \\
+                    E[y_i] &= E[\beta_0] + E[\beta_1 x_i] + E[\epsilon] \\
+                    &= \beta_0 + \beta_1 x_i + 0 \\
+                    E[y_i] &= \beta_0 + \beta_1 x_i \\
+                    \because Var[y_i] &= E[y_i^2] - E[y_i]^2 \\
+                    E[y_i^2] &= Var[y_i] + E[y_i]^2 \\
+                    \because Var[y_i] &= \sigma^2\\
+                    E[y_i^2] &= \sigma^2 + (\beta_0 + \beta_1 x_i)^2 \\
+                    \text{Solving for $E[\bar{y}^2]$} &: \\
+                    \because Var[\bar{y}] &= E[\bar{y}^2] - E[\bar{y}]^2 \\
+                    E[\bar{y}^2] &= Var[\bar{y}] + E[\bar{y}]^2 \\
+                    \because Var[\bar{y}] &= \frac{\sigma^2}{n} \\ 
+                    \because E[\bar{y}] &= \beta_0 + \beta_1 \bar{x} \\
+                    E[\bar{y}^2] &= \frac{\sigma^2}{n} + (\beta_0 + \beta_1 \bar{x})^2
+                \end{align*}
+                Now plugging all values into $E[S_{yy}]$:
+                \begin{align*}
+                    E[S_{yy}] &= E[\sum y_i^2] - n E[\bar{y}^2] \\
+                    &= (\sum\sigma^2 + \sum(\beta_0 + \beta_1 x_i)^2) - n (\frac{\sigma^2}{n} + (\beta_0 + \beta_1 \bar{x})^2) \\
+                    &= n\sigma^2 + \sum(\beta_0 + \beta_1 x_i)^2 - n \frac{\sigma^2}{n} - n (\beta_0 + \beta_1 \bar{x})^2 \\
+                    &= n\sigma^2 + \sum(\beta_0 + \beta_1 x_i)^2 - \sigma^2 - n (\beta_0 + \beta_1 \bar{x})^2 \\
+                \end{align*}
+                Proof con't:
+                \begin{align*}
+                    &= n\sigma^2 - \sigma^2 + \sum(\beta_0 + \beta_1 x_i)^2  - n (\beta_0 + \beta_1 \bar{x})^2 \\
+                    &= \sigma^2(n - 1)+ \sum(\beta_0^2 + \beta_1^2 x_i^2 + 2\beta_0\beta_1 x_i) - n (\beta_0^2 + \beta_1^2 \bar{x}^2 + 2\beta_0\beta_1 \bar{x}) \\
+                    &= \sigma^2(n - 1)+ n\beta_0^2 + \beta_1^2 \sum x_i^2 + 2\beta_0\beta_1 \sum x_i - n\beta_0^2 - n\beta_1^2 \bar{x}^2 - 2\beta_0\beta_1 n\bar{x} \\
+                    &= \sigma^2(n - 1) + \beta_1^2 \sum x_i^2 + 2\beta_0\beta_1 n\bar{x}  - n\beta_1^2 \bar{x}^2 - 2\beta_0\beta_1 n\bar{x} \\
+                    &= \sigma^2(n - 1)+ \beta_1^2 \sum x_i^2 - n\beta_1^2 \bar{x}^2 \\
+                    &= \sigma^2(n - 1)+ \beta_1^2 (\sum x_i^2 - n\bar{x}^2) \\
+                    &= \sigma^2(n - 1)+ \beta_1^2 (\sum x_i^2 + n\bar{x}^2 - n\bar{x}^2 - n\bar{x}^2) \\
+                    &= \sigma^2(n - 1)+ \beta_1^2 (\sum x_i^2 + n\bar{x}^2 - 2n\bar{x}^2) \\
+                    &= \sigma^2(n - 1)+ \beta_1^2 (\sum x_i^2 + \sum\bar{x}^2 - 2\sum\bar{x}^2) \\
+                    &= \sigma^2(n - 1)+ \beta_1^2 \sum (x_i^2 + \bar{x}^2 - 2x_i \bar{x}) \\
+                    &= \sigma^2(n - 1)+ \beta_1^2 \sum (x_i - \bar{x})^2 \\
+                    E[S_{yy}] &= \sigma^2(n - 1)+ \beta_1^2 S_{xx}
+                \end{align*}
+                Solving for $E[\hat{\beta_1}^2 S_{xx}]$:
+                \begin{align*}
+                    E[\hat{\beta_1}^2 S_{xx}] &= S_{xx} E[\hat{\beta_1^2}] \\
+                    &= S_{xx} \left[Var[ \hat{\beta_1}] + E[\hat{\beta_1}]^2 \right]  \\
+                    &= S_{xx} \left[ \frac{\sigma^2}{S_{xx}} + \beta_1^2 \right] \\
+                    &= \sigma^2 + \beta_1^2 S_{xx}
+                \end{align*}
+                Now solve for $E[SSE]$:
+                \begin{align*}
+                    E[SSE] &= E[S_{yy}] - E[\hat{\beta_1}^2 S_{xx}] \\
+                    &= \sigma^2(n - 1)+ \beta_1^2 S_{xx} - \sigma^2 - \beta_1^2 S_{xx} \\
+                    &= \sigma^2(n - 1) - \sigma^2 \\
+                    &= \sigma^2(n - 2)
+                \end{align*}
+                $\therefore$ We have shown that $E[SSE] = (n - 2)\sigma^2$
+            \end{proof}
         \end{enumerate}
-        $\therefore$ We can conclude that because, the $E[\hat{\beta_1}] = \beta_1$ and $Var[\hat{\beta_1}]= \frac{\sigma^2}{S_{xx}}$,
-        We can safely 
+        
     \item Given the model:
         \[ y_i = \beta_1 + \beta_2 i + \epsilon_i \]
         \begin{enumerate}[(a)]

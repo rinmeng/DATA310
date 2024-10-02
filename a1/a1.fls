@@ -76,6 +76,9 @@ INPUT /Users/rin/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 OUTPUT a1.pdf
 INPUT /Users/rin/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /Users/rin/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
+INPUT /Users/rin/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /Users/rin/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
+INPUT /Users/rin/Library/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT /Users/rin/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmtt12.tfm
 INPUT a1.aux
 INPUT /Users/rin/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk
