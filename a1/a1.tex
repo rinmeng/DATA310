@@ -118,6 +118,8 @@
                 \item $\hat{\beta_1} = \frac{S_{xx}}{S_{xy}}$
                 \item $S_{xy} = \sum_{i = 1}^{n} (x_i - \bar{x})(y_i - \bar{y})$
                 \item $S_{xx} = \sum_{i = 1}^{n} (x_i - \bar{x})^2$
+                \item $y_i = \hat{\beta_0} + \hat{\beta_1} x_i + \epsilon_i$
+                \item $\bar{y} = \beta_0 + \beta_1 \bar{x}$
             \end{itemize}
             We want to show that 
             
@@ -126,32 +128,89 @@
             \begin{proof}
             LHS$\colon$
             \begin{align*}
-            \hat{\beta_1} &= \frac{S_{xy}}{S_{xx}} = \frac{\sum_{i = 1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{S_{xx}} \\
-            &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})\epsilon_i}{S_{xx}}
+                \hat{\beta_1} &= \frac{S_{xy}}{S_{xx}} = \frac{\sum_{i = 1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{S_{xx}} \\
+                &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})(\hat{\beta_0} + \hat{\beta_1} x_i + \epsilon_i - \beta_0 - \beta_1 \bar{x})}{S_{xx}} \\
             \end{align*}
-            we know that 
-            \[\epsilon_i \sim N(0, \sigma^2) \Rightarrow Var(\epsilon_i) = \sigma^2\]
-            and that
-            \[Var(\beta_1) = \frac{\sigma^2}{S_{xx}}\]
-            so then it must also be true that,
-            \begin{align*}
-            Var(\hat{\beta_1}) &= Var\left(\frac{\sum_{i = 1}^{n} (x_i - \bar{x})\epsilon_i}{S_{xx}}\right) \\
-            &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})^2 Var(\epsilon_i)}{Var(S_{xx})} \\
-            &= \frac{\sum_{i = 1}^{n} (x_i - \bar{x})^2 \sigma^2}{S_{xx}^2} = \frac{S_{xx} \sigma^2}{S_{xx}^2} \\
-            &= \frac{\sigma^2}{S_{xx}}
-            \end{align*}
-            \end{proof}
-            and we know that, $E[\hat{\beta_1}] = \beta_1$ so then we can conclude that
-            \begin{itemize}
-                \item Variance: $Var(\hat{\beta_1}) = \frac{\sigma^2}{S_{xx}}$
-                \item Mean: $E[\hat{\beta_1}] = \beta_1$
-            \end{itemize}
-            thus,
-            \[\hat{\beta_1} \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})\]
-            $\therefore$ $\hat{\beta_1}$ is normally distributed with mean $\beta_1$ and variance $\frac{\sigma^2}{S_{xx}}$.
-        \item 
-            Since $SSE = \sum_{i=1}^{n} (y_i - \hat{y_i})^2$, we want to show that: $E[SSE] = \frac{\sigma^2}{n - 2}$.
             
+            \end{proof}
+        
     \end{enumerate}
+    \item Given the model: 
+        \[ y_i = \beta_1 + \beta_2 i + \epsilon_i \]
+        \begin{enumerate}[(a)]
+            \item We want to derive the least-squares estimators for $\beta_1$ and $\beta_2$.
+            \begin{align*}
+                S(\beta_1, \beta_2) &= \sum  (y_i - \beta_1 x_i - \beta_2 i)^2 \\
+                \frac{\delta S}{\delta \beta_1} &= -2 \sum  (y_i - \beta_1 x_i - \beta_2 i)x_i = 0 \\
+                &= -2 \sum  (y_i x_i - \beta_1 x_i^2 - \beta_2 i x_i)  = 0 \\
+                \sum  y_i x_i &= \beta_1\sum  x_i^2 + \beta_2\sum  x_i i \\ 
+                \frac{\delta S}{\delta \beta_2} &= -2 \sum  (y_i - \beta_1 x_i - \beta_2 i)i = 0 \\
+                &= -2 \sum  (y_i i - \beta_1 x_i i - \beta_2 i^2) = 0 \\
+                \sum  y_i i &= \beta_1\sum  x_i i + \beta_2\sum  i^2 
+            \end{align*}
+            Solving for $\beta_2$
+            \begin{align*}
+                \sum  y_i x_i &= \beta_1\sum  x_i^2 + \beta_2\sum  x_i i\\ 
+                \beta_1\sum  x_i^2 &= \sum  y_i x_i - \beta_2\sum  x_i i \\ 
+                \beta_1 &= \frac{\sum  y_i x_i - \beta_2\sum  x_i i}{\sum  x_i^2} \\ 
+                \sum  y_i i &= \beta_1\sum  x_i i + \beta_2\sum  i^2 \\ 
+                \beta_1\sum  x_i i &= \sum  y_i i - \beta_2\sum  i^2 \\ 
+                \beta_1 &= \frac{ \sum  y_i i - \beta_2\sum  i^2}{\sum  x_i i}
+            \end{align*}
+            Now set them equal to each other and solve for $\beta_2$
+            \begin{align*}
+                \frac{\sum  y_i x_i - \beta_2\sum  x_i i}{\sum  x_i^2} &= \frac{ \sum  y_i i - \beta_2\sum  i^2}{\sum  x_i i} \\
+                (\sum  y_i x_i - \beta_2\sum  x_i i) (\sum  x_i i) &= (\sum  x_i^2)(\sum  y_i i - \beta_2\sum  i^2) \\
+                \sum  y_i x_i (\sum  x_i i) - \beta_2(\sum  x_i i)^2  &= \sum  y_i i (\sum  x_i^2) - \beta_2\sum  i^2 (\sum  x_i^2) \\
+                \beta_2\sum  i^2 \sum  x_i^2 - \beta_2 (\sum  x_i i)^2 &= \sum  y_i i \sum  x_i^2 - \sum  y_i x_i \sum  x_i i \\
+                \beta_2(\sum  i^2 \sum  x_i^2 - (\sum  x_i i)^2) &= \sum  y_i i \sum  x_i^2 - \sum  y_i x_i \sum  x_i i
+            \end{align*}
+            Finally, we have:
+            \[ \beta_2 = \frac{\sum  y_i i \sum  x_i^2 - \sum  y_i x_i \sum  x_i i}{\sum  i^2 \sum  x_i^2 - (\sum  x_i i)^2}\]
+            Solving for $\beta_1$ using same approach:
+            \begin{align*}
+                \sum  y_i x_i &= \beta_1\sum  x_i^2 + \beta_2\sum  x_i i \\ 
+                \beta_2\sum  x_i i &= \sum  y_i x_i - \beta_1\sum  x_i^2 \\ 
+                \beta_2 &= \frac{\sum  y_i x_i - \beta_1\sum  x_i^2}{\sum  x_i i} \\ 
+                \sum  y_i i &= \beta_1\sum  x_i i + \beta_2\sum  i^2 \\ 
+                \beta_2\sum  i^2 &= \sum  y_i i - \beta_1\sum  x_i i \\ 
+                \beta_2 &= \frac{\sum  y_i i - \beta_1\sum  x_i i}{\sum  i^2}
+            \end{align*}
+            Now set them equal to each other and solve for $\beta_1$
+            \begin{align*}
+                \frac{\sum  y_i x_i - \beta_1\sum  x_i^2}{\sum  x_i i} &= \frac{\sum  y_i i - \beta_1\sum  x_i i}{\sum  i^2} \\
+                (\sum  y_i x_i - \beta_1\sum  x_i^2)(\sum  i^2) &= (\sum  x_i i)(\sum  y_i i - \beta_1\sum  x_i i) \\
+                \sum  y_i x_i \sum  i^2 - \beta_1\sum  x_i^2\sum  i^2 &= \sum  y_i i\sum  x_i i - \beta_1(\sum  x_i i)^2 \\
+                \beta_1(\sum  x_i i)^2  - \beta_1\sum  x_i^2\sum  i^2 &= \sum  y_i i\sum  x_i i - \sum  y_i x_i \sum  i^2 \\
+                \beta_1((\sum  x_i i)^2 - \sum  x_i^2\sum  i^2) &= \sum  y_i i\sum  x_i i - \sum  y_i x_i \sum  i^2 \\
+            \end{align*}
+            Finally, we have:
+            \[ \beta_1 = \frac{\sum y_i i\sum x_i i - \sum y_i x_i \sum i^2}{(\sum x_i i)^2 - \sum x_i^2 \sum i^2 }\]
+
+            To find the conditions where $x_i$ makes the estimators not well-defined, we let $x_i = i$.
+            so then we have our $\beta_1$,
+            \begin{align*}
+                \beta_1 &= \frac{\sum y_i i\sum  x_i i - \sum y_i  x_i \sum i^2}{(\sum  x_i)^2 - \sum  x_i^2 \sum i^2 } \\
+                &= \frac{\sum y_i i\sum  i^2 - \sum y_i  i \sum i^2}{(\sum i^2)^2 - \sum i^2 \sum i^2 }\\
+                &= \frac{\sum y_i i\sum  i^2 - \sum y_i  i \sum i^2}{\sum i^2\sum i^2 - \sum i^2 \sum i^2 }\\
+                &= \frac{0}{0}
+            \end{align*}
+            and then our $\beta_2$, 
+            \begin{align*}
+                \beta_2 &= \frac{\sum  y_i i \sum  x_i^2 - \sum  y_i x_i \sum  x_i i}{\sum  i^2 \sum  x_i^2 - (\sum  x_i i)^2} \\
+                &= \frac{\sum  y_i i \sum   i^2 - \sum  y_i  i \sum   i^2}{(\sum i^2)^2 - \sum i^2 \sum i^2 }\\
+                &= \frac{\sum  y_i i \sum   i^2 - \sum  y_i  i \sum   i^2}{\sum i^2 \sum i^2 - \sum i^2 \sum i^2 }\\
+                &= \frac{0}{0}
+            \end{align*}
+            $\therefore$ The estimator $\beta_1$ and $\beta_2$ is not well-defined at $x_i = i$.
+
+            \item For the case where the coefficient estimators are well-defined, the unbiased estimator for $\sigma^2$ is:
+            \begin{align*}
+                E[\sum \epsilon^2] &= (n-2)\sigma^2 \\ 
+                \sigma^2 &= \frac{\sum \epsilon^2}{n-2}
+            \end{align*}
+            Derived from, Question 3b.
+            
+        \end{enumerate}
 \end{enumerate}
 \end{document}
