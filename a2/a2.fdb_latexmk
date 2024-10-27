@@ -1,9 +1,12 @@
 # Fdb version 4
-["pdflatex"] 1729844485.65591 "c:/Users/agarp/DATA310/a2/a2.tex" "a2.pdf" "a2" 1729844485.91023 0
+["pdflatex"] 1730063765.9347 "c:/Users/agarp/DATA310/a2/a2.tex" "a2.pdf" "a2" 1730063766.23308 0
   "Rplot.png" 1729833112 6250 b21de6ff549a680d95d5614017ad820f ""
   "Rplot02.png" 1729840996 5979 e6aec4c25899fab2d9b18c93314c8d6c ""
-  "a2.aux" 1729844485 32 1b174032087fb90900fa6203d3bb0a7e "pdflatex"
-  "a2.tex" 1729844485 14756 870c1cdea3ceb10b49916239989a3c4d ""
+  "Rplot04.png" 1730062103 6182 4d2ab39ef0bf6710d90ebb09eccdc5d6 ""
+  "Rplot041.png" 1730063480 4459 904053fa6ffb1c56d7aab4f16ba92f77 ""
+  "Rplot042.png" 1730063674 5954 b9134de0717815e84a5f567e774efc12 ""
+  "a2.aux" 1730063766 33 49835556b7333b11e315c53cb0218aaa "pdflatex"
+  "a2.tex" 1730063765 23263 38ed849c7dd3856bd603b541e41a8e6a ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1726521896 1004 54797486969f23fa377b128694d548df ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1726521896 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1726521896 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -64,7 +67,7 @@
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1726526317 94778 586128d0518932816a6219e97e511aa0 ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-var/web2c/pdftex/pdflatex.fmt" 1726521944 1901795 1038a42a3e3f82a7ffcfa8c4175bc416 ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf.cnf" 1726521909 956 26ec9cd9a5edcbea822f9dddc1187176 ""
-  "c:/Users/agarp/DATA310/a2/a2.tex" 1729844485 14756 870c1cdea3ceb10b49916239989a3c4d ""
+  "c:/Users/agarp/DATA310/a2/a2.tex" 1730063765 23263 38ed849c7dd3856bd603b541e41a8e6a ""
   (generated)
   "a2.aux"
   "a2.log"

@@ -34,7 +34,6 @@
             \[ SS_{Reg} = MS_{Reg} \cdot DF_{Reg} = 411.34 \cdot 1 = 411.34\]
             \[ SS_{Error} = MS_{Error} \cdot DF_{Error}= 7.80 \cdot 7 = 54.60 \]
             \[ SS_{Total} = SS_{Reg} + SS_{Error} = 411.34 + 54.60 = 465.94\]
-            \[ MS_{Total} = \frac{SS_{Total}}{DF_{Total}} = \frac{465.94}{8} = 58.24 \]
             \begin{center}
                 \begin{tabular}{|c|c|c|c|c|}
                     \hline
@@ -42,7 +41,7 @@
                     \hline
                     Reg. & 1 & 411.34 & 411.34 & 52.77 \\
                     Error & 7 & 54.60 & 7.80 &  \\
-                    Total & 8 & 465.94 & 58.24 & \\
+                    Total & 8 & 465.94 &  & \\
                     \hline
                 \end{tabular}
             \end{center}
@@ -55,7 +54,8 @@ Response: R
 W          1 411.42  411.42  52.767 0.0001679 ***
 Residuals  7  54.58    7.80                      
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01
+‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
             \end{verbatim}
             Our hand calculations are fairly consistent with the output from the anova
             function in R, minus a few rounding errors.
@@ -128,16 +128,21 @@ Coefficients:
   Estimate Std. Error t value Pr(>|t|)    
 x   1.2653     0.1389   9.111 7.72e-06 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01
+‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.7179 on 9 degrees of freedom
-Multiple R-squared:  0.9022,	Adjusted R-squared:  0.8913 
-F-statistic:    83 on 1 and 9 DF,  p-value: 7.725e-06
+Residual standard error:
+0.7179 on 9 degrees of freedom
+Multiple R-squared:  0.9022,
+Adjusted R-squared:  0.8913 
+F-statistic: 83 on 1 and 9 DF, 
+p-value: 7.725e-06
             \end{verbatim}
             \item To plot the scatter plot, we can run this code:
             \begin{verbatim}
-plot(data$x, data$y, main = "Scatterplot with Fitted Line",
- xlab = "x", ylab = "y", pch = 19)
+plot(data$x, data$y, 
+main = "Scatterplot with Fitted Line",
+xlab = "x", ylab = "y", pch = 19)
 abline(model, col = "red")
             \end{verbatim}
             
@@ -233,40 +238,239 @@ plot(angle, distance,
             Now we can calculate the values:
             \[ \bar{x} = \frac{23.8}{9} = 2.64 \]
             \[\bar{y} = \frac{5.32}{9} = 0.59 \]
-            \begin{align*}
-                S_{xx} &= (1.3-2.64)^{2}+(4.0-2.64)^{2}+(2.7-2.64)^{2}\\
-                &+(2.2-2.64)^{2}+(3.6-2.64)^{2}+(4.9-2.64)^{2}\\
-                &+(0.9-2.64)^{2}+(1.1-2.64)^{2}+(3.1-2.64)^{s2} \\
-                &= 15.48
-            \end{align*}
-            \begin{align*}
-                S_{xy} &= (1.3-2.64)(0.43-0.59)+(4.0-2.64)(0.84-0.59)\\
-                &+(2.7-2.64)(0.58-0.59)+(2.2-2.64)(0.58-0.59)\\
-                &+(3.6-2.64)(0.70-0.59)+(4.9-2.64)(1.00-0.59)\\
-                &+(0.9-2.64)(0.27-0.59)+(1.1-2.64)(0.29-0.59)\\
-                &+(3.1-2.64)(0.63-0.59) = 2.62
-            \end{align*}
-            \[ \hat{\beta}_1 = \frac{2.62}{15.48} = 0.169\]
-            \[ \hat{\beta}_0 = 0.59 - 0.169 \cdot 2.64 = 0.144\]
+            Using \texttt{Sxx <- sum((angle - sqr(mean(angle))))},
+            \[ S_{xx} =  15.48 \]
+            Using \texttt{Sxy <- sum((angle - mean(angle))*(distance - ybar))} where,
+            \texttt{ybar <- mean(distance)},
+            \[ S_{xy} = 2.62 \]
+            Using \texttt{beta1 <- Sxy / Sxx},
+            \[ \hat{\beta}_1 = 0.169 \]
+            Using \texttt{beta0 <- ybar - beta1 * xbar},
+            \[ \hat{\beta}_0 = 0.144 \]
 
             \item Now let us provide a 95\% confidence interval for the slope and the intercept parameters.
             \begin{enumerate}
                 \item The confidence interval for the slope $\beta_1$ is given by
                 \[ \hat{\beta}_1 \pm t_{\alpha / 2, 7} \times SE(\hat{\beta}_1) \]
-                \[ t_{\alpha / 2, 7} = 2.364 \]
-                \[SE(\hat{\beta}_1) = \sqrt{\frac{MSE}{S_{xx}}} = \sqrt{\sum \frac{(y_i - \hat{y}_i)^2}{n-2} \cdot \frac{1}{S_{xx}}}\]
-                \[ = \sqrt{0.002364994 \cdot \frac{1}{15.48}} = 0.0123\]
-                \[ \hat{\beta}_1 \pm 2.364 \times 0.0123 = 0.169 \pm 0.0290 \]
+
+                $ t_{\alpha / 2, 7} = 2.364$  = \texttt{tval <- 2.364}
+
+                Using \texttt{sebeta1 <- sqrt(MSE / Sxx)},
+                \[ SE(\hat{\beta}_1) = 0.0123 \]
+                Using \texttt{cibeta1 <- c(beta1 - tval * sebeta1, beta1 + tval * sebeta1)}
                 \[ \Rightarrow 0.140 \leq \hat{\beta_1} \leq 0.198 \]
                 \item The confidence interval for the intercept $\beta_0$ is given by
                 \[ \hat{\beta}_0 \pm t \times SE(\hat{\beta}_0) \]
-                \[ t_{\alpha / 2, 7} = 2.364 \]
-                \[ SE(\hat{\beta}_0) = \sqrt{MSE \left( \frac{1}{n} + \frac{\bar{x}^2}{S_{xx}} \right)} \]
-                \[ = \sqrt{0.002364994 \left( \frac{1}{9} + \frac{2.64^2}{15.48} \right)} = 0.0364 \]
-                \[ \hat{\beta}_0 \pm 2.364 \times 0.0364 = 0.144 \pm 0.086 \]
+                $ t_{\alpha / 2, 7} = 2.364$  = \texttt{tval <- 2.364}
+
+                Using \texttt{sebeta0 <- sqrt(MSE * (1/9 + xbar\^{}2 / Sxx)},
+                \[ SE(\hat{\beta}_0) = 0.043 \]
+
+                Using \texttt{cibeta0 <- c(beta0 - tval * sebeta0, beta0 + tval * sebeta0)}
                 \[ \Rightarrow 0.058 \leq \hat{\beta_0} \leq 0.230 \]
             \end{enumerate}
+
+            \item ANOVA Table of whether or not the distance depends on the angle of the ramp, we first need to calculate:
+            \begin{enumerate}
+                \item $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i$ = \texttt{yhat <- beta0 + beta1 * angle}
+                \item $\bar{y} = \frac{1}{n} \sum_{i=1}^{n} y_i$ = \texttt{ybar <- mean(distance)}
+                \item $SST = \sum (y_i - \bar{y})^2$ = \texttt{SST <- sum((distance - ybar)\^{}2)}
+                \item $SSE = \sum (y_i - \hat{y}_i)^2$ = \texttt{SSE <- sum((distance - yhat)\^{}2)}    
+                \item $SSR = \sum (\hat{y}_i - \bar{y})^2$ = \texttt{SSR <- SST - SSE}
+                \item $DF_R = 1$ = \texttt{dfR <- 1}
+                \item $DF_E = n - 2 = 9 - 2 = 7 $ = \texttt{dfE <- 7}
+                \item $DF_T = n - 1 = 9$ = \texttt{dfT <- 9}
+                \item $MSR = \frac{SSR}{DF_R} = \frac{SSR}{1}$ = \texttt{MSR <- SSR / dfR}\
+                \item $MSE = \frac{SSE}{DF_E} =  \frac{SSE}{n-2}$ = \texttt{MSE <- SSE / dfE}
+                \item $F = \frac{MSR}{MSE}$ = \texttt{F = MSR / MSE}
+            \end{enumerate}
+            Using \texttt{SST = sum((distance - mean(distance))\^{}2)}
+            \[ SST = 0.462 \]
+            Using \texttt{SSE = sum((distance - yhat)\^{}2)}
+            \[ SSE = 0.0166 \]
+            Using \texttt{SSR = SST - SSE}
+            \[ SSR = 0.446 \]   
+            Using \texttt{MSR <- SSR / dfR}
+            \[ MSR = 0.446 \]
+            Using \texttt{MSE <- SSE / dfE}
+            \[ MSE = 0.0024 \]
+            Using \texttt{F = MSR / MSE}
+            \[ F = 188.6 \]
+            \begin{center}
+                \begin{tabular}{|c|c|c|c|c|}
+                    \hline
+                    Source & DF & SS & MS & F \\
+                    \hline
+                    Reg. & 1 & 0.446 & 0.446 & 188.6 \\
+                    Error & 7 & 0.0166 & 0.0024 &  \\
+                    Total & 8 & 0.462 &  & \\
+                    \hline
+                \end{tabular}
+            \end{center}
+            On the F-table of critical values for $\alpha = 0.05$,
+            \[ F_{\alpha, DF_1, DF_2} = F_{\alpha, DF_R, DF_E} = F_{0.05, 1, 7} = 5.59 \]
+            So then, since $F = 188.6 > 5.59$, we reject the null hypothesis that 
+            the angle of the ramp significantly affects the distance travelled.
+            \item To find a 95\% confidence interval for the expected distance at an angle of 2.5 degrees, we have to calculate:
+            
+            \begin{enumerate}
+                \item $x_0 = 2.5$ \texttt{x0 <- 2.5}
+                \item $n = 9$
+                \item $\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$ = \texttt{xbar <- mean(angle)}
+                \item $S_{xx} = \sum_{i=1}^{n} (x_i - \bar{x})^2$ = \texttt{Sxx <- sum((angle - xbar)\^{}2)}
+                \item $s^2 = \frac{SSE}{n-2}$ = \texttt{ssquared <- SSE / dfE}
+                \item $yhat0 = \beta_0 + \beta_1 x_0$ = \texttt{yhat0 <- beta0 + beta1 * x0}
+                \item $t_{\alpha / 2, n-2} = t_{0.025, 7} = 2.364$ = \texttt{tval <- 2.364}
+                \item SE($\hat{y}_0$) = $\sqrt{s^2 \left(\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{xx}} \right)}$
+                
+                = \texttt{semr <- sqrt(ssquared * (1/9 + (x0 - xbar)\^{}2 / Sxx)}
+                \item CI = $\hat{y}_0 \pm t_{\alpha / 2, n-2} \times  \sqrt{s^2 \left(\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{xx}} \right)}$
+                
+                = \texttt{cimr <- c(yhat0 - tval * semr, yhat0 + tval * semr)}
+            \end{enumerate}
+            Using \texttt{x0 <- 2.5}
+            \[ x_0 = 2.5 \]
+            Using \texttt{xbar <- mean(angle)}
+            \[ \bar{x} = 2.64 \]
+            Using \texttt{Sxx <- sum((angle - xbar)\^{}2)}
+            \[ S_{xx} = 15.48 \]
+            Using \texttt{ssquared <- SSE / dfE}
+            \[ s^2 = 0.0024 \]
+            Using \texttt{y0 <- beta0 + beta1 * x0}
+            \[ y_0 = 0.56 \]
+            Using the t-table,
+            $t_{\alpha / 2, n-2} = t_{0.025, 7} = 2.364$
+            Using  \texttt{semr <- sqrt(ssquared * (1/9 + (x0 - xbar)\^{}2 / Sxx)}
+            \[ SE(\hat{y}_0) = 0.0512 \]
+            Using \texttt{cimr <- c(yhat0 - tval * semr, yhat0 + tval * semr)}
+            \[ CI = 0.528 \leq \hat{y}_0 \leq 0.605 \]
+            Now calculating the 95\% prediction interval for the distance at an angle of 2.5 degrees, we have:
+            \[\hat{y}_0 \pm t_{\alpha / 2, n-2} \times \sqrt{s^2 \left(1 + \frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{xx}} \right)}\]
+            Where $1 + \frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{xx}}$ is the variability in a new single observation, it also makes the 
+            prediction interval wider than the confidence interval.
+            Using \texttt{sepi <-  sqrt(ssquared * (1 + 1/n + (x0 - xbar)\^{}2 / Sxx))}
+            \[ SE(\hat{y}_0) = 0.0513 \]
+            Using \texttt{piso <- c(yhat0 - tval * sepi, yhat0 + tval * sepi)}
+            \[ PI = 0.445 \leq \hat{y}_0 \leq 0.688 \]
         \end{enumerate}
+
+        \item Using R for this problem, we can run the following code:
+            \begin{enumerate}
+                \item Code: \begin{verbatim}
+library(DAAG)
+data("fossum", package = "DAAG")
+plot(fossum$totlngth, fossum$hdlngth, 
+xlab = "Total Length (cm)", 
+ylab = "Head Length (mm)", 
+main = "Head Length vs Total Length in Female Possums",
+pch = 16, col = "blue")
+                \end{verbatim}
+                Output:
+                \begin{center}
+                    \includegraphics[width=0.8\textwidth]{Rplot04.png}
+                \end{center}
+                \item Code: \begin{verbatim}
+model <- lm(fossum$hdlngth ~ fossum$totlngth)
+summary(model)
+                \end{verbatim}
+                Output:
+                \begin{verbatim}
+Call:
+lm(formula = hdlngth ~ totlngth, data = fossum)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.3149 -0.9030 -0.2548  0.9259  4.8458 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 49.97455    5.30325   9.423 8.14e-12 ***
+totlngth     0.47976    0.06026   7.961 7.50e-10 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01
+‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.633 on 41 degrees of freedom
+Multiple R-squared:  0.6072, 
+Adjusted R-squared:  0.5976 
+F-statistic: 63.38 on 1 and 41 DF, 
+p-value: 7.501e-10
+                \end{verbatim}
+                \includegraphics[width=0.8\textwidth]{Rplot042.png}
+                \item Code: \begin{verbatim}
+anova(model)
+                \end{verbatim}
+                    \begin{verbatim}
+Analysis of Variance Table
+
+Response: hdlngth
+            Df Sum Sq Mean Sq F value    Pr(>F)    
+totlngth   1 169.09 169.089  63.383 7.501e-10 ***
+Residuals 41 109.38   2.668                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01
+‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+                \end{verbatim}
+                \item Code: \begin{verbatim}
+# F-statistic from ANOVA table
+F_statistic <- 63.38 
+
+# degrees of freedom
+dfR <- 1  # Regression
+dfE <- 41  # Error
+
+# critical f-value for a two-tailed test at alpha = 0.05
+alpha <- 0.05
+F_critical <- qf(1 - alpha, dfR, dfE)
+
+# output
+cat("Calculated F-statistic:", F_statistic, "\n")
+cat("Critical F-value (two-tailed):", F_critical, "\n")
+
+# conclusion
+if (F_statistic > F_critical) {
+    cat("Reject the null hypothesis:
+There is a significant relationship
+between hdlngth and totlngth.\n")
+} else {
+    cat("Fail to reject the null hypothesis: 
+There is no significant relationship
+between hdlngth and totlngth.\n")
+}
+                \end{verbatim}
+                Output:
+                \begin{verbatim}
+Calculated F-statistic: 63.38 
+Critical F-value (two-tailed): 4.078546 
+Reject the null hypothesis:
+There is a significant relationship
+between hdlngth and totlngth.
+                \end{verbatim}
+                \item Code: \begin{verbatim}
+new_data <- data.frame(totlngth = 85)
+predict(model, new_data, interval = "prediction", level = 0.95)
+                \end{verbatim}
+                Output:
+                \begin{verbatim}
+fit      lwr      upr
+1 90.75419 87.39878 94.10959
+                \end{verbatim}
+                \[ \Rightarrow 87.40 \leq \hat{y}_0 \leq 94.11 \]
+                \item Code: \begin{verbatim}
+plot(fitted(model), resid(model), 
+xlab = "Fitted Values", 
+ylab = "Residuals", 
+main = "Residuals vs Fitted Values",
+pch = 16, col = "black")
+abline(h = 0, col = "red", lty = 2)
+                \end{verbatim}
+                Output:
+                \begin{center}
+                    \includegraphics[width=0.8\textwidth]{Rplot041.png}
+                \end{center}
+                They look fairly symmetrically distributed around 0, but there are some outliers, so 
+                we can assume that the residuals are normally distributed.
+            \end{enumerate}
 \end{enumerate}
 End of Assignment 2.
 \end{document}

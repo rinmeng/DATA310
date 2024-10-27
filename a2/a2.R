@@ -27,6 +27,10 @@ abline(model, col = "red")
 angle <- c(1.3, 4.0, 2.7, 2.2, 3.6, 4.9, 0.9, 1.1, 3.1)
 distance <- c(0.43, 0.84, 0.58, 0.58, 0.70, 1.00, 0.27, 0.29, 0.63)
 
+lm3 <- lm(distance ~ angle)
+summary(lm3)
+anova(lm3)
+
 # Calculate means
 x_bar <- mean(angle)
 y_bar <- mean(distance)
@@ -68,8 +72,7 @@ distance <- c(0.43, 0.84, 0.58, 0.58, 0.70, 1.00, 0.27, 0.29, 0.63)
 # Calculate means
 y_bar <- mean(distance)
 
-# Calculate SST
-SST <- sum((distance - y_bar)^2)
+
 
 # Calculate Sxy and Sxx
 Sxy <- sum((angle - mean(angle)) * (distance - y_bar))
@@ -80,10 +83,13 @@ beta1 <- Sxy / Sxx
 beta0 <- y_bar - beta1 * mean(angle)
 
 # Predicted values
-predicted_values <- beta0 + beta1 * angle
+yhat <- beta0 + beta1 * angle
+
+# Calculate SST
+SST <- sum((distance - y_bar)^2)
 
 # Calculate SSE
-SSE <- sum((distance - predicted_values)^2)
+SSE <- sum((distance - yhat)^2)
 
 # Calculate SSR
 SSR <- SST - SSE
@@ -103,9 +109,32 @@ F_statistic <- MSR / MSE
 
 # Print results
 cat("SST:", SST, "\n")
-cat("SSR:", SSR, "\n")
 cat("SSE:", SSE, "\n")
+cat("SSR:", SSR, "\n")
 cat("Mean Square Regression (MSR):", MSR, "\n")
 cat("Mean Square Error (MSE):", MSE, "\n")
 cat("F-statistic:", F_statistic, "\n")
+
+# Predicted value at x0 = 2.5
+x0 <- 2.5
+y_hat_0 <- beta0 + beta1 * x0
+
+# Calculate residuals and variance (s^2)
+residuals <- distance - (beta0 + beta1 * angle)
+ssquared <- sum(residuals^2) / (length(angle) - 2)
+
+# Calculate t-value for 95% confidence interval (approximation)
+t_value <- 2.3646  # Approximate value for 95% CI with df = 7 (n - 2)
+
+# Confidence Interval for Expected Distance (Mean Response)
+semr <- sqrt(ssquared * (1 / length(angle) + (x0 - x_bar)^2 / Sxx))
+cimr <- c(y_hat_0 - t_value * semr, y_hat_0 + t_value * semr)
+
+# Prediction Interval for a Single Observation
+sepi <- sqrt(ssquared * (1 + 1 / length(angle) + (x0 - x_bar)^2 / Sxx))
+piso <- c(y_hat_0 - t_value * sepi, y_hat_0 + t_value * sepi)
+
+# Print results
+cat("95% Confidence Interval for Expected Distance at x0 =", x0, ":", cimr, "\n")
+cat("95% Prediction Interval for Single Observation at x0 =", x0, ":", piso, "\n")
 
