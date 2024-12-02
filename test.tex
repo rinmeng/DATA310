@@ -1,0 +1,192 @@
+\documentclass[12pt]{article}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{changepage}
+\usepackage{graphicx}
+
+\newcommand{\ytilde}{\tilde{y}}
+\newcommand{\X}{\X}
+\newcommand{\btilde}{\tilde{\beta}}
+\newcommand{\etilde}{\tilde{\epsilon}}
+\newcommand{\lm}{\ytilde = \X\btilde + \etilde}
+\newcommand{\exE}{E[\etilde]}
+\newcommand{\etet}{E[\etilde\etilde^{\T}]}
+\newcommand{\btildematrix}{(\X^{\T}\X)^{-1}\X^{\T} \ytilde}
+\newcommand{\xtx}{\X^{\T}\X}
+\newcommand{\xtxinv}{(\X^{\T}\X)^{-1}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\lamvector}{\lambda_{1}, \lambda_{2}, \ldots, \lambda_{p}}
+\newcommand{\T}{\T}
+\newcommand{\HM}{\mathbf{H}}
+
+
+\title{Assignment 3}
+\author{Rin Meng \\ Student ID: 51940633}
+\begin{document}
+\maketitle
+\textbf{Note:} From this point onwards I will use tilde on top of a variable to denote that it is a vector.
+    \begin{enumerate}[1.]
+        \item Given the linear regression model in the form $\lm$ where $\exE = 0$ and $\etet = \sigma^2I$, and $\etilde$ is 
+        normally distributed, which implies that the least-squares estimator for $\btilde$
+        \[\btilde = \btildematrix\]
+        Where we require the matrix ($\xtx$) to be invertible.
+            \begin{enumerate}[a)]
+                \item Show that $\xtx + \lambda \I$ is invertible, that is $\text{det}(\xtx + \lambda \I) \neq 0$ 
+                when $\lambda \neq 0$, and $\I$ is the identity matrix.
+                \begin{proof}
+                    We know that $\xtx$ is non-invertible, that is $\text{det}(\xtx) = 0$, and $a$ and $d$ are non-negative.
+                    \begin{align*}
+                        \xtx + \lambda \I &=  \begin{bmatrix} a & b \\ c & d \end{bmatrix} + 
+                        \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \\
+                        &= \begin{bmatrix} a + \lambda & b \\ c & d + \lambda \end{bmatrix}
+                    \end{align*}
+                    Using the formula of determinant of $2 \times 2$ matrix, we have
+                    \begin{align*}
+                        \text{det}(\xtx + \lambda \I) &= \text{det}\left(
+                            \begin{bmatrix} a + \lambda & b \\ c & d + \lambda \end{bmatrix}\right) \\
+                        &= (a + \lambda)(d + \lambda) - bc \\
+                        &= ad + a\lambda + d\lambda + \lambda^2 - bc \\
+                        &= ad + \lambda(a + d) + \lambda^2 - bc
+                    \end{align*}
+                    Given that $\text{det}(\xtx) = 0 \Rightarrow ad - bc = 0 \Leftrightarrow ad = bc$.
+                    \begin{align*}
+                        \text{det}(\xtx + \lambda \I) &= bc + \lambda(a + d) + \lambda^2 - bc \\
+                        &= \lambda(a + d) + \lambda^2
+                    \end{align*}
+                    \begin{align*} 
+                        \because \lambda \neq 0 &\Rightarrow \lambda^2 > 0 \\
+                        \because a, d \geq 0 &\Rightarrow a + d > 0 \\
+                        &\Rightarrow \lambda(a + d) + \lambda^2 > 0
+                    \end{align*}
+                
+                    $\therefore$ We have shown that $\text{det}(\xtx + \lambda \I) \neq 0$ when $\lambda \neq 0$.
+                \end{proof}
+
+                \item Given the expression 
+                \[(\ytilde - \X \btilde)^\T(\ytilde - \X \btilde) + \lambda \btilde^\T \btilde\]
+                where $\lambda > 0$
+
+                Let us expand the expression algebraically, using what we learned about minimizing 
+                $(\ytilde - \X \btilde)^\T(\ytilde - \X \btilde)$ to obtain the estimator $\btilde$ in terms of $\X$, $\ytilde$ and $\lambda$.
+                \begin{align*}
+                    (\ytilde - \X \btilde)^\T(\ytilde - \X \btilde) &= (\ytilde^\T - \btilde^\T \X^\T)(\ytilde - \X \btilde) \\
+                    &= \ytilde^\T \ytilde - \ytilde^\T \X \btilde - \btilde^\T \X^\T \ytilde + \btilde^\T \X^\T \X \btilde \\
+                    &= \ytilde^\T \ytilde - 2\btilde^\T \X^\T \ytilde + \btilde^\T \X^\T \X \btilde\\ 
+                    (\ytilde - \X \btilde)^\T(\ytilde - \X \btilde) + \lambda \btilde^\T \btilde 
+                    &= \ytilde^\T \ytilde - 2\btilde^\T \X^\T \ytilde + \btilde^\T \X^\T \X \btilde + \lambda \btilde^\T \btilde \\
+                    &= \ytilde^\T \ytilde - 2\btilde^\T \X^\T \ytilde + \btilde^\T (\X^\T \X + \lambda \I) \btilde
+                \end{align*}
+                Now let us minimize this expression my deriving it with respect to $\btilde$ and setting it to zero.
+                \begin{align*}
+                    \frac{\partial}{\partial \btilde} ( \ytilde^\T \ytilde  + 2\btilde^\T \X^T \ytilde + \btilde^\T (\xtx + \lambda \I)\btilde) &= 0 \\
+                    - 2 \X^\T \ytilde + (\X^\T \X + \lambda \I) \btilde &= 0 \\
+                    \X^\T \ytilde &= (\X^\T \X + \lambda \I) \btilde \\
+                    \btilde &= (\X^\T \X + \lambda \I)^{-1} \X^\T \ytilde
+                \end{align*}
+
+                $\therefore$ The estimator $\btilde$ in terms of $\X$, $\ytilde$ and $\lambda$ is 
+                $(\X^\T \X + \lambda \I)^{-1} \X^\T \ytilde$.
+
+                \item Show that the estimator $\btilde$ is biased.
+                \begin{align*}
+                    (\X^\T \X + \lambda \I)^{-1} \X^\T \ytilde &= (\X^\T \X + \lambda \I)^{-1} \X^\T (\X \beta + \epsilon) \\
+                    &= (\X^\T \X + \lambda \I)^{-1} \X^\T \X \beta + (\X^\T \X + \lambda \I)^{-1} \X^\T \epsilon \\
+                    \text{Let } \mathbf{A} & = (\X^\T \X + \lambda \I)^{-1} \X^\T \X \\
+                    \text{E}[\btilde] &= \text{E}[A \beta] + (\X^\T \X + \lambda \I)^{-1} \X^\T \text{E}[\epsilon] \\
+                    \text{E}[\btilde] &= \text{E}[A \beta]
+                \end{align*}
+                For $\btilde$ to be unbiased, we need $\text{E}[\btilde] = \beta \Leftrightarrow \text{E}[\mathbf{A} \beta] = \beta \leftrightarrow \mathbf{A} = \I$,
+                but we know that this is now true because $\mathbf{A} = (\X^\T \X + \lambda \I)^{-1} \X^\T \X \neq \I$.
+
+                $\therefore$ The estimator $\btilde$ is biased.
+            \end{enumerate}
+
+            \item Given that $H_0: \beta_2 = \beta_6 = 0$, and $H_0: \beta_2 = \beta_6$, $\beta_3 = \beta_4$.
+                \begin{enumerate}[a)]
+                    \item A matrix T can rpresent the null hypothesis $H_0: \beta_2 = \beta_6 = 0$ as
+                    \begin{align*}
+                        T &= \begin{bmatrix} 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 1 \end{bmatrix}
+                    \end{align*}
+                    \item A matrix T can represent the null hypothesis $H_0: \beta_2 = \beta_6$, $\beta_3 = \beta_4$ as
+                    \begin{align*}
+                        T &= \begin{bmatrix} 0 & 1 & 0 & 0 & 0 & -1 \\ 0 & 0 & 1 & -1 & 0 & 0 \end{bmatrix}
+                    \end{align*}
+                    Using the fact that $\beta_2 = \beta_6 \Leftrightarrow \beta_2 - \beta_6 = 0$ and $\beta_3 = \beta_4 \Leftrightarrow \beta_3 - \beta_4 = 0$.
+                    
+                    \item Under $H_0: \T\btilde = 0$, show that $\text{Var}(\T \btilde) = \sigma^2 \T (\X^\T \X)^{-1} \T^\T$.
+                        \begin{proof}
+                            \begin{align*}
+                                \text{Var}(\T \btilde) &= \text{Var}(\T (\X^\T \X)^{-1} \X^\T \etilde) \\
+                                &= \T (\X^\T \X)^{-1} \X^\T  \cdot \text{Var}(\etilde) \cdot \X (\X^\T \X)^{-1} \T^\T \\
+                                &= \T (\X^\T \X)^{-1} \X^\T \cdot \sigma^2 \I \cdot \X (\X^\T \X)^{-1} \T^\T \\
+                                &= \sigma^2 \T (\X^\T \X)^{-1} \X^\T \X (\X^\T \X)^{-1} \T^\T \\
+                                &= \sigma^2 \T (\X^\T \X)^{-1} \T^\T
+                            \end{align*}
+                            $\therefore$ We have shown that $\text{Var}(\T \btilde) = \sigma^2 \T (\X^\T \X)^{-1} \T^\T$.
+                        \end{proof}
+                    \item Under $H_0: \T\btilde = 0$, show that 
+                        $\T \btilde = \T (\X^\T \X)^{-1} \X^\T \etilde$.
+                        \begin{proof}
+                            \begin{align*}
+                                \T \btilde &= \T (\X^\T \X)^{-1} \X^\T \ytilde \\
+                                &= \T (\X^\T \X)^{-1} \X^\T (\X \beta + \epsilon) \\
+                                &= \T (\X^\T \X)^{-1} \X^\T \X \beta + \T (\X^\T \X)^{-1} \X^\T \epsilon \\
+                                &= \T \beta + \T (\X^\T \X)^{-1} \X^\T \epsilon \\
+                                &= \T (\X^\T \X)^{-1} \X^\T \epsilon
+                            \end{align*}
+                            $\therefore$ We have shown that $\T \btilde = \T (\X^\T \X)^{-1} \X^\T \etilde$.
+                        \end{proof}
+
+                    \item Under $H_0: \T\btilde = 0$, show that $\hat{\btilde}^\T \T^\T \Sigma^{-1} \T\hat{\btilde} \sim \chi_{(r)}^2$, where 
+                    $\Sigma^{-1} = \text{Var}(\T\hat{\btilde})^{-1}$.
+
+                    \begin{proof}
+                        Recall that the $\hat{\btilde} = (\X^\T \X)^{-1} \X^\T \ytilde$, where $\ytilde = \X \beta + \etilde$.
+                        The variance of $\T \hat{\btilde}$ is $\text{Var}(\T \hat{\btilde}) = \sigma^2 \T (\X^\T \X)^{-1} \T^\T$.
+                        Thus, 
+                        \begin{align*}
+                            \Sigma &= \sigma^2 \T (\X^\T \X)^{-1} \T^\T \\
+                            \Sigma^{-1} &= \frac{1}{\sigma^2} (\T (\X^\T \X)^{-1} \T^\T)^{-1}
+                        \end{align*}
+                        Now we have
+                        \begin{align*}
+                            \hat{\btilde}^\T \T^\T \Sigma^{-1} \T \hat{\btilde} 
+                            &= \hat{\btilde}^\T \T^\T \left(\frac{1}{\sigma^2} (\T (\X^\T \X)^{-1} \T^\T)^{-1}\right) \T \hat{\btilde} \\
+                            &= \frac{1}{\sigma^2} \hat{\btilde}^\T \T^\T (\T (\X^\T \X)^{-1} \T^\T)^{-1} \T \hat{\btilde}
+                        \end{align*}
+                        Let us go back to our null hypothesis $H_0: \T \btilde = 0$. We know that the $\hat{\btilde}$ 
+                        is normally distributed with mean 0 and covariance matrix $\sigma^2 (\X^\T \X)^{-1}$, therefore so is
+                        $\T \hat{\btilde}$. Then we have
+                        \[\T\hat{\btilde} \sim N(\T\beta, \sigma^2 \T (\X^\T \X)^{-1} \T^\T)\]
+                        Under $H_0$ this becomes
+                        \[\T\hat{\btilde} \sim N(0, \sigma^2 \T (\X^\T \X)^{-1} \T^\T)\]
+                        Now, let S be the statistic of our test, then
+                        \[S = \frac{1}{\sigma^2} \hat{\btilde}^\T \T^\T (\T (\X^\T \X)^{-1} \T^\T)^{-1} \T \hat{\btilde} \]
+                        then $S$ is definetly in a form of $\chi^2$ distribution, we can show by letting
+                        \[\textbf{z} = \T \hat{\btilde}\]
+                        \[\textbf{A} = \frac{1}{\sigma^2} (\T (\X^\T \X)^{-1} \T^\T)^{-1} \]
+                        and that implies, 
+                        \[S = \textbf{z}^\T A \textbf{z}\]
+                        where $\text{z} \sim N(0, \sigma^2 \T (\X^\T \X)^{-1} \T^\T)$, as shown above. The rank of 
+                        $\T$ is $r = \textbf{rank}(\T)$, which represents the number of linearly independent rows in $\T$, where it
+                        ultimately implies that the degrees of freedom of $\chi^2$ distribution is $r$.
+
+                        $\therefore$ We have shown that 
+                        $\hat{\btilde}^\T \T^\T \Sigma^{-1} \T \hat{\btilde} \sim \chi_{(\textbf{rank}(\textbf{T}))}^2 = \chi_{(r)}^2$.
+                    \end{proof}
+                    \item Show that 
+                    \[(\I - \HM)[\X \xtxinv \T^\T \textbf{C}^{-1} \T \xtxinv \X] = 0\]
+
+                    \begin{proof}
+                        We know that $\HM = \X \xtxinv \X^\T$, and $\textbf{C} = \T (\X^\T \X)^{-1} \T^\T$. The term 
+                        $(\I - \HM)$ is the projection matrix that projects onto 
+                        the orthogonal complement of the column space of $\X$. Thus:
+                    
+
+                    \end{proof}
+                \end{enumerate}
+    \end{enumerate}
+End of Assignment 3.
+\end{document}

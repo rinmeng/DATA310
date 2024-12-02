@@ -1,0 +1,477 @@
+\documentclass[12pt]{article}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{changepage}
+\usepackage{graphicx}
+
+\newcommand{\ytilde}{\tilde{y}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\btilde}{\tilde{\beta}}
+\newcommand{\etilde}{\tilde{\epsilon}}
+\newcommand{\lm}{\ytilde = \X\btilde + \etilde}
+\newcommand{\exE}{E[\etilde]}
+\newcommand{\etet}{E[\etilde\etilde^{\T}]}
+\newcommand{\btildematrix}{(\X^{\T}\X)^{-1}\X^{\T} \ytilde}
+\newcommand{\xtx}{\X^{\T}\X}
+\newcommand{\xtxinv}{(\X^{\T}\X)^{-1}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\lamvector}{\lambda_{1}, \lambda_{2}, \ldots, \lambda_{p}}
+\newcommand{\T}{\mathbf{T}}
+\newcommand{\HM}{\mathbf{H}}
+
+
+\title{Assignment 3}
+\author{Rin Meng \\ Student ID: 51940633}
+\begin{document}
+\maketitle
+\textbf{Note:} From this point onwards I will use tilde on top of a variable to denote that it is a vector.
+    \begin{enumerate}[1.]
+        \item Given the linear regression model in the form $\lm$ where $\exE = 0$ and $\etet = \sigma^2I$, and $\etilde$ is 
+        normally distributed, which implies that the least-squares estimator for $\btilde$
+        \[\btilde = \btildematrix\]
+        Where we require the matrix ($\xtx$) to be invertible.
+            \begin{enumerate}[a)]
+                \item Show that $\xtx + \lambda \I$ is invertible, that is $\text{det}(\xtx + \lambda \I) \neq 0$ 
+                when $\lambda \neq 0$, and $\I$ is the identity matrix.
+                \begin{proof}
+                    We know that $\xtx$ is non-invertible, that is $\text{det}(\xtx) = 0$, and $a$ and $d$ are non-negative.
+                    \begin{align*}
+                        \xtx + \lambda \I &=  \begin{bmatrix} a & b \\ c & d \end{bmatrix} + 
+                        \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \\
+                        &= \begin{bmatrix} a + \lambda & b \\ c & d + \lambda \end{bmatrix}
+                    \end{align*}
+                    Using the formula of determinant of $2 \times 2$ matrix, we have
+                    \begin{align*}
+                        \text{det}(\xtx + \lambda \I) &= \text{det}\left(
+                            \begin{bmatrix} a + \lambda & b \\ c & d + \lambda \end{bmatrix}\right) \\
+                        &= (a + \lambda)(d + \lambda) - bc \\
+                        &= ad + a\lambda + d\lambda + \lambda^2 - bc \\
+                        &= ad + \lambda(a + d) + \lambda^2 - bc
+                    \end{align*}
+                    Given that $\text{det}(\xtx) = 0 \Rightarrow ad - bc = 0 \Leftrightarrow ad = bc$.
+                    \begin{align*}
+                        \text{det}(\xtx + \lambda \I) &= bc + \lambda(a + d) + \lambda^2 - bc \\
+                        &= \lambda(a + d) + \lambda^2
+                    \end{align*}
+                    \begin{align*} 
+                        \because \lambda \neq 0 &\Rightarrow \lambda^2 > 0 \\
+                        \because a, d \geq 0 &\Rightarrow a + d > 0 \\
+                        &\Rightarrow \lambda(a + d) + \lambda^2 > 0
+                    \end{align*}
+                
+                    $\therefore$ We have shown that $\text{det}(\xtx + \lambda \I) \neq 0$ when $\lambda \neq 0$.
+                \end{proof}
+
+                \item Given the expression 
+                \[(\ytilde - \X \btilde)^\T(\ytilde - \X \btilde) + \lambda \btilde^\T \btilde\]
+                where $\lambda > 0$
+
+                Let us expand the expression algebraically, using what we learned about minimizing 
+                $(\ytilde - \X \btilde)^\T(\ytilde - \X \btilde)$ to obtain the estimator $\btilde$ in terms of $\X$, $\ytilde$ and $\lambda$.
+                \begin{align*}
+                    (\ytilde - \X \btilde)^\T(\ytilde - \X \btilde) &= (\ytilde^\T - \btilde^\T \X^\T)(\ytilde - \X \btilde) \\
+                    &= \ytilde^\T \ytilde - \ytilde^\T \X \btilde - \btilde^\T \X^\T \ytilde + \btilde^\T \X^\T \X \btilde \\
+                    &= \ytilde^\T \ytilde - 2\btilde^\T \X^\T \ytilde + \btilde^\T \X^\T \X \btilde\\ 
+                    (\ytilde - \X \btilde)^\T(\ytilde - \X \btilde) + \lambda \btilde^\T \btilde 
+                    &= \ytilde^\T \ytilde - 2\btilde^\T \X^\T \ytilde + \btilde^\T \X^\T \X \btilde + \lambda \btilde^\T \btilde \\
+                    &= \ytilde^\T \ytilde - 2\btilde^\T \X^\T \ytilde + \btilde^\T (\X^\T \X + \lambda \I) \btilde
+                \end{align*}
+                Now let us minimize this expression my deriving it with respect to $\btilde$ and setting it to zero.
+                \begin{align*}
+                    \frac{\partial}{\partial \btilde} ( \ytilde^\T \ytilde  + 2\btilde^\T \X^T \ytilde + \btilde^\T (\xtx + \lambda \I)\btilde) &= 0 \\
+                    - 2 \X^\T \ytilde + (\X^\T \X + \lambda \I) \btilde &= 0 \\
+                    \X^\T \ytilde &= (\X^\T \X + \lambda \I) \btilde \\
+                    \btilde &= (\X^\T \X + \lambda \I)^{-1} \X^\T \ytilde
+                \end{align*}
+
+                $\therefore$ The estimator $\btilde$ in terms of $\X$, $\ytilde$ and $\lambda$ is 
+                $(\X^\T \X + \lambda \I)^{-1} \X^\T \ytilde$.
+
+                \item Show that the estimator $\btilde$ is biased.
+                \begin{align*}
+                    (\X^\T \X + \lambda \I)^{-1} \X^\T \ytilde &= (\X^\T \X + \lambda \I)^{-1} \X^\T (\X \beta + \epsilon) \\
+                    &= (\X^\T \X + \lambda \I)^{-1} \X^\T \X \beta + (\X^\T \X + \lambda \I)^{-1} \X^\T \epsilon \\
+                    \text{Let } \mathbf{A} & = (\X^\T \X + \lambda \I)^{-1} \X^\T \X \\
+                    \text{E}[\btilde] &= \text{E}[A \beta] + (\X^\T \X + \lambda \I)^{-1} \X^\T \text{E}[\epsilon] \\
+                    \text{E}[\btilde] &= \text{E}[A \beta]
+                \end{align*}
+                For $\btilde$ to be unbiased, we need $\text{E}[\btilde] = \beta \Leftrightarrow \text{E}[\mathbf{A} \beta] = \beta \leftrightarrow \mathbf{A} = \I$,
+                but we know that this is now true because $\mathbf{A} = (\X^\T \X + \lambda \I)^{-1} \X^\T \X \neq \I$.
+
+                $\therefore$ The estimator $\btilde$ is biased.
+            \end{enumerate}
+
+            \item Given that $H_0: \beta_2 = \beta_6 = 0$, and $H_0: \beta_2 = \beta_6$, $\beta_3 = \beta_4$.
+                \begin{enumerate}[a)]
+                    \item A matrix T can rpresent the null hypothesis $H_0: \beta_2 = \beta_6 = 0$ as
+                    \begin{align*}
+                        T &= \begin{bmatrix} 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 1 \end{bmatrix}
+                    \end{align*}
+                    \item A matrix T can represent the null hypothesis $H_0: \beta_2 = \beta_6$, $\beta_3 = \beta_4$ as
+                    \begin{align*}
+                        T &= \begin{bmatrix} 0 & 1 & 0 & 0 & 0 & -1 \\ 0 & 0 & 1 & -1 & 0 & 0 \end{bmatrix}
+                    \end{align*}
+                    Using the fact that $\beta_2 = \beta_6 \Leftrightarrow \beta_2 - \beta_6 = 0$ and $\beta_3 = \beta_4 \Leftrightarrow \beta_3 - \beta_4 = 0$.
+                    
+                    \item Under $H_0: \T\btilde = 0$, show that $\text{Var}(\T \btilde) = \sigma^2 \T (\X^\T \X)^{-1} \T^\T$.
+                        \begin{proof}
+                            \begin{align*}
+                                \text{Var}(\T \btilde) &= \text{Var}(\T (\X^\T \X)^{-1} \X^\T \etilde) \\
+                                &= \T (\X^\T \X)^{-1} \X^\T  \cdot \text{Var}(\etilde) \cdot \X (\X^\T \X)^{-1} \T^\T \\
+                                &= \T (\X^\T \X)^{-1} \X^\T \cdot \sigma^2 \I \cdot \X (\X^\T \X)^{-1} \T^\T \\
+                                &= \sigma^2 \T (\X^\T \X)^{-1} \X^\T \X (\X^\T \X)^{-1} \T^\T \\
+                                &= \sigma^2 \T (\X^\T \X)^{-1} \T^\T
+                            \end{align*}
+                            $\therefore$ We have shown that $\text{Var}(\T \btilde) = \sigma^2 \T (\X^\T \X)^{-1} \T^\T$.
+                        \end{proof}
+                    \item Under $H_0: \T\btilde = 0$, show that 
+                        $\T \btilde = \T (\X^\T \X)^{-1} \X^\T \etilde$.
+                        \begin{proof}
+                            \begin{align*}
+                                \T \btilde &= \T (\X^\T \X)^{-1} \X^\T \ytilde \\
+                                &= \T (\X^\T \X)^{-1} \X^\T (\X \beta + \epsilon) \\
+                                &= \T (\X^\T \X)^{-1} \X^\T \X \beta + \T (\X^\T \X)^{-1} \X^\T \epsilon \\
+                                &= \T \beta + \T (\X^\T \X)^{-1} \X^\T \epsilon \\
+                                &= \T (\X^\T \X)^{-1} \X^\T \epsilon
+                            \end{align*}
+                            $\therefore$ We have shown that $\T \btilde = \T (\X^\T \X)^{-1} \X^\T \etilde$.
+                        \end{proof}
+
+                    \item Under $H_0: \T\btilde = 0$, show that $\hat{\btilde}^\T \T^\T \Sigma^{-1} \T\hat{\btilde} \sim \chi_{(r)}^2$, where 
+                    $\Sigma^{-1} = \text{Var}(\T\hat{\btilde})^{-1}$.
+
+                    \begin{proof}
+                        Recall that the $\hat{\btilde} = (\X^\T \X)^{-1} \X^\T \ytilde$, where $\ytilde = \X \beta + \etilde$.
+                        The variance of $\T \hat{\btilde}$ is $\text{Var}(\T \hat{\btilde}) = \sigma^2 \T (\X^\T \X)^{-1} \T^\T$.
+                        Thus, 
+                        \begin{align*}
+                            \Sigma &= \sigma^2 \T (\X^\T \X)^{-1} \T^\T \\
+                            \Sigma^{-1} &= \frac{1}{\sigma^2} (\T (\X^\T \X)^{-1} \T^\T)^{-1}
+                        \end{align*}
+                        Now we have
+                        \begin{align*}
+                            \hat{\btilde}^\T \T^\T \Sigma^{-1} \T \hat{\btilde} 
+                            &= \hat{\btilde}^\T \T^\T \left(\frac{1}{\sigma^2} (\T (\X^\T \X)^{-1} \T^\T)^{-1}\right) \T \hat{\btilde} \\
+                            &= \frac{1}{\sigma^2} \hat{\btilde}^\T \T^\T (\T (\X^\T \X)^{-1} \T^\T)^{-1} \T \hat{\btilde}
+                        \end{align*}
+                        Let us go back to our null hypothesis $H_0: \T \btilde = 0$. We know that the $\hat{\btilde}$ 
+                        is normally distributed with mean 0 and covariance matrix $\sigma^2 (\X^\T \X)^{-1}$, therefore so is
+                        $\T \hat{\btilde}$. Then we have
+                        \[\T\hat{\btilde} \sim N(\T\beta, \sigma^2 \T (\X^\T \X)^{-1} \T^\T)\]
+                        Under $H_0$ this becomes
+                        \[\T\hat{\btilde} \sim N(0, \sigma^2 \T (\X^\T \X)^{-1} \T^\T)\]
+                        Now, let S be the statistic of our test, then
+                        \[S = \frac{1}{\sigma^2} \hat{\btilde}^\T \T^\T (\T (\X^\T \X)^{-1} \T^\T)^{-1} \T \hat{\btilde} \]
+                        then $S$ is definetly in a form of $\chi^2$ distribution, we can show by letting
+                        \[\textbf{z} = \T \hat{\btilde}\]
+                        \[\textbf{A} = \frac{1}{\sigma^2} (\T (\X^\T \X)^{-1} \T^\T)^{-1} \]
+                        and that implies, 
+                        \[S = \textbf{z}^\T A \textbf{z}\]
+                        where $\text{z} \sim N(0, \sigma^2 \T (\X^\T \X)^{-1} \T^\T)$, as shown above. The rank of 
+                        $\T$ is $r = \textbf{rank}(\T)$, which represents the number of linearly independent rows in $\T$, where it
+                        ultimately implies that the degrees of freedom of $\chi^2$ distribution is $r$.
+
+                        $\therefore$ We have shown that 
+                        $\hat{\btilde}^\T \T^\T \Sigma^{-1} \T \hat{\btilde} \sim \chi_{(\textbf{rank}(\textbf{T}))}^2 = \chi_{(r)}^2$.
+                    \end{proof}
+                    \item Show that 
+                    \[(\I - \HM)[\X \xtxinv \T^\T \textbf{C}^{-1} \T \xtxinv \X] = 0\]
+
+                    \begin{proof}
+                        We know that $\HM = \X \xtxinv \X^\T$, and $\textbf{C} = \T (\X^\T \X)^{-1} \T^\T$. The term 
+                        $(\I - \HM)$ is the projection matrix that projects onto 
+                        the orthogonal complement of the column space of $\X$. Thus we get:
+                        \[ (\I - \HM) = \I - \X \xtxinv \X^\T \]
+                        \[ (\I - \HM)[\X \xtxinv \T^\T \textbf{C}^{-1} \T \xtxinv \X] \]
+                        \[= \X \xtxinv \T^\T \textbf{C}^{-1} \T \xtxinv \X \]
+                        \[- \HM (\X \xtxinv \T^\T \textbf{C}^{-1} \T \xtxinv \X)\]
+                        and since $\HM\X = \X$, we have
+                        \[= \X \xtxinv \T^\T \textbf{C}^{-1} \T \xtxinv \X \]
+                        \[- \X \xtxinv \T^\T \textbf{C}^{-1} \T \xtxinv \X\]
+                        \[= 0\]
+                        
+                        $\therefore$ We have shown that $(\I - \HM)[\X \xtxinv \T^\T \textbf{C}^{-1} \T \xtxinv \X] = 0$.
+                    \end{proof}
+
+                    \item Under $H_0: \T\btilde = 0$, show that 
+                    \[F_0 = \frac{(\hat{\btilde}^\T \T^\T \textbf{C}^{-1} \T \hat{\btilde}) / r}{MSE} \sim F_{(r, n - p)}\] 
+                    where MSE is computed for the full model (with p parameters)
+
+                    From earlier proof, we know that $\hat{\btilde}^\T \T^\T \textbf{C}^{-1} \T \hat{\btilde} \sim \chi_{(r)}^2$.
+                    We also know that $MSE = \frac{SSE}{n - p} \Leftrightarrow MSE \sim \chi^2_{(n - p)}$.
+                    Then we have something like this
+                    \[F_0 = \frac{(\hat{\btilde}^\T \T^\T \textbf{C}^{-1} \T \hat{\btilde}) / r}{SSE / (n - p)} \] 
+                    where we notice that this is a form of $F$ distribution, 
+                    where both numerator and denominator are some sort of $\chi^2$ distribution now visually we can see that
+                    \[= \frac{\sigma^2 \chi^2_{r}}{\sigma^2 \chi^2_{n-p}} = \frac{\chi^2_{r}}{\chi^2_{n-p}} 
+                    \sim F_{(r, n - p)}\]
+
+                    \item Find a matrix $\T$ that represents some hypothesis: 
+                    \[H_\gamma : \beta_0 = \beta_1 = \beta_2 = \cdots = \beta_k\]
+                    
+                    \begin{proof}
+                        Let us consider the hypothesis 
+                        \[H_\gamma : \beta_0 = \beta_1 = \beta_2 = \cdots = \beta_k = \beta\]
+                        (here we let $\beta$ can represent a common value for all the parameters).
+                        We can represent this hypothesis as 
+                        \[\beta_0 - \beta = 0, \beta_1 - \beta = 0, \beta_2 - \beta = 0, \ldots, \beta_k - \beta = 0\]
+                        and our goal is to present this a matrix $\T$ such that 
+                        \[\T \beta = 0\]
+                        where $\beta = [\beta_0, \beta_1, \ldots, \beta_k]^\T$.
+
+                        Now lets start constructing the matrix $\T$, with these constraints:
+                        \begin{enumerate}
+                            \item We need the matrix $\T$ to be the size of $k_{\text{rows}} \times (k + 1)_{\text{column}}$, where $k$ is the number of parameters and the 
+                            $ + 1$ is reserved for the intercept term.
+                            \item The first column of $\T$ represents constraints for $\beta_0$, 
+                            the second column represents constraints for $\beta_1$, and so on.
+                            \item Each row of $\T$ represents the constraints of a parameter in some form $\beta_i - \beta = 0$. 
+                            We can write this as $\T \beta = \mathbf{c}$.
+                        \end{enumerate}
+                        \[\T = 
+                            \begin{bmatrix} 
+                                   1 & -1 & 0 & 0 & \cdots & 0 
+                                \\ 0 & 1 & -1 & 0 & \cdots & 0 
+                                \\ 0 & 0 & 1 & -1 & \cdots & 0 
+                                \\ \vdots & \vdots & \vdots & \vdots & \ddots & \vdots 
+                                \\ 0 & 0 & 0 & 0 & \cdots & 1 
+                            \end{bmatrix}
+                        \]
+                        then the $\T \beta$ matrix will look like this
+                        \[\T \beta = 
+                            \begin{bmatrix} 
+                                   1 & -1 & 0 & 0 & \cdots & 0 
+                                \\ 0 & 1 & -1 & 0 & \cdots & 0 
+                                \\ 0 & 0 & 1 & -1 & \cdots & 0 
+                                \\ \vdots & \vdots & \vdots & \vdots & \ddots & \vdots 
+                                \\ 0 & 0 & 0 & 0 & \cdots & 1 
+                            \end{bmatrix}
+                            \begin{bmatrix} 
+                                \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_k
+                            \end{bmatrix}
+                            = 
+                            \begin{bmatrix} 
+                                \beta_0 - \beta_1 \\ \beta_1 - \beta_2 \\ \beta_2 - \beta_3 \\ \vdots \\ \beta_{k-1} - \beta_k
+                            \end{bmatrix}
+                            =
+                            \begin{bmatrix}
+                                0 \\ 0 \\ 0 \\ \vdots \\ 0
+                            \end{bmatrix}
+                        \]
+                        which implies that $\mathbf{c} = 0 \Rightarrow \T \beta = 0$.
+                        $\therefore$ We have shown that the matrix $\T$ that represents the hypothesis $H_\gamma : \beta_0 = \beta_1 = \beta_2 = \cdots = \beta_k$ is
+                    \end{proof}
+                \end{enumerate}
+                \item Problem 3.25 on page 130, using ``lm'' function to answer the following questions. We are given that the linear regression
+                model is 
+                \[ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \beta_4 x_4 +  \epsilon\]
+                \begin{enumerate}[a.]
+                    \item $H_0: \beta_1 = \beta_2 = \beta_3 = \beta_4 = \beta 
+                    \Leftrightarrow \beta_1 - \beta = 0, \beta_2 - \beta = 0, \beta_3 - \beta = 0, \beta_4 - \beta = 0$.
+                    \begin{verbatim}
+# Assuming that the data we are using is table.b1
+# are the columns/predictors
+# Load required library to use linearHypothesis()
+library(car)
+model = lm(y ~ x1 + x2 + x3 + x4, data = table.b1)
+
+# testing the hypothesis
+linear_hypothesis_test(model, "x1 = x2 = x3 = x4")
+                    \end{verbatim}
+
+                    \begin{verbatim}
+# function to perform hypothesis test using 
+# linearHypothesis()
+linear_hypothesis_test <- function(model) {
+
+# use matrix to specify the hypothesis and constraintss
+# from the last proof we did in the previous question
+hypothesis_matrix <- matrix(c(1, -1, 0, 0, 0, 
+                              0, 1, -1, 0, 0, 
+                              0, 0, 1, -1, 0,
+                              0, 0, 0, 1, -1),
+                nrow = 4, ncol = 5, byrow = TRUE)
+
+# specify the hypothesis (all coefficients equal to 0)
+hypothesis_values <- c(0, 0, 0, 0)
+
+# perform the linear hypothesis test
+linear_hypothesis_result <- linearHypothesis(model, 
+                                hypothesis_matrix, 
+                                hypothesis_values)
+return(linear_hypothesis_result)}
+                    \end{verbatim}
+                    \item $H_0: \beta_1 = \beta_2, \beta_3 = \beta_4 \Leftrightarrow \beta_1 - \beta_2 = 0, \beta_3 - \beta_4 = 0$.
+                    \begin{verbatim}
+# Let us use the same technique as above
+
+linear_hypothesis_test(model, "x1 = x2, x3 = x4")
+
+linear_hypothesis_test <- function(model) {
+                        
+hypothesis_matrix <- matrix(c(0, 1, -1, 0, 0, 
+                              0, 0, 0, 1, -1),
+                nrow = 2, ncol = 5, byrow = TRUE)
+                
+hypothesis_values <- c(0, 0)
+
+linear_hypothesis_result <- linearHypothesis(model, 
+                                hypothesis_matrix, 
+                                hypothesis_values)
+
+return(linear_hypothesis_result)}
+                    \end{verbatim}
+                    \item $H_0: \beta_1 - 2\beta_2 = 4\beta_3$, $\beta_1 + 2 \beta_2 = 0 
+                    \Leftrightarrow \beta_1 = -2\beta_2 + 4 \beta_3, \beta_1 = -2\beta_2$.
+                    \begin{verbatim}
+# Again, we will use the same technique as above
+# but redefine the hypothesis matrix and values
+linear_hypothesis_test(model, "x1 - 2*x2 = 4*x3,
+                         x1 + 2*x2 = 0")
+
+linear_hypothesis_test <- function(model) {
+
+hypothesis_matrix <- matrix(c(1, -2, 0, 4, 0, 
+                              1, 2, 0, 0, 0),
+                nrow = 2, ncol = 5, 
+                byrow = TRUE)
+
+hypothesis_values <- c(0, 0)
+
+linear_hypothesis_result <- linearHypothesis(model, 
+                                hypothesis_matrix, 
+                                hypothesis_values)
+
+return(linear_hypothesis_result)}
+                    \end{verbatim}
+                \end{enumerate}
+
+                \item Problem 3.1 on page 125
+                \begin{enumerate}
+                    \item 
+                    \begin{verbatim}
+library(MPV)
+model_3.1 <- lm(y ~ x2 + x7 + x8, data = table.b1)
+#####################
+Call:
+lm(formula = y ~ x2 + x7 + x8, data = table.b1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.0370 -0.7129 -0.2043  1.1101  3.7049 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -1.808372   7.900859  -0.229 0.820899    
+x2           0.003598   0.000695   5.177 2.66e-05 ***
+x7           0.193960   0.088233   2.198 0.037815 *  
+x8          -0.004816   0.001277  -3.771 0.000938 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’
+0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.706 on 24 degrees of freedom
+Multiple R-squared:  0.7863,	Adjusted R-squared:  0.7596 
+F-statistic: 29.44 on 3 and 24 DF,  p-value: 3.273e-08
+                    \end{verbatim}
+                    \item 
+                    \begin{verbatim}
+anova_3.1 <- anova(model_3.1)
+#####################
+Analysis of Variance Table
+
+Response: y
+          Df  Sum Sq Mean Sq F value    Pr(>F)    
+x2         1  76.193  76.193  26.172 3.100e-05 ***
+x7         1 139.501 139.501  47.918 3.698e-07 ***
+x8         1  41.400  41.400  14.221 0.0009378 ***
+Residuals 24  69.870   2.911                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 
+0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+                    \end{verbatim}
+                    \item 
+                    \begin{verbatim}
+t_stats <- summary_model_3.1$coefficients[, "t value"]
+#####################
+(Intercept)          x2          x7          x8 
+-0.228883    5.177090    2.198262   -3.771036 
+                    \end{verbatim}
+                    The conclusion we can draw about the roles the variables $x_2$, $x_7$, and $x_8$ play in predicting $y$ is that
+                    $x_2$ and $x_7$ are significant predictors of $y$ because their $t$-statistics are greater than 2 in absolute value,
+                    and their $p$-values are less than 0.05. $x_8$ is $\textbf{highly}$ significant predictor of $y$ because its $t$-statistic is less than -2.
+
+                    $\therefore$ We reject all null hypotheses that $\beta_2 = 0$, $\beta_7 = 0$, and $\beta_8 = 0$.
+                    \item  
+                    \begin{verbatim}
+r_squared <- summary_model_3.1$r.squared
+#####################
+[1] 0.7863069
+adj_r_squared <- summary_model_3.1$adj.r.squared
+#####################
+[1] 0.7595953
+                    \end{verbatim}
+                    $\therefore$ The $R^2$ value is 0.7863 and the adjusted $R^2$ value is 0.7596.
+                    \item \begin{verbatim}
+model_reduced <- lm(y ~ x2 + x8, data = table.b1)
+summary(model_reduced)
+#####################
+Call:
+lm(formula = y ~ x2 + x8, data = table.b1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.4280 -1.3744 -0.0177  1.0010  4.1240 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 14.7126750  2.6175266   5.621 7.55e-06 ***
+x2           0.0031111  0.0007074   4.398 0.000178 ***
+x8          -0.0068083  0.0009658  -7.049 2.18e-07 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.832 on 25 degrees of freedom
+Multiple R-squared:  0.7433,	Adjusted R-squared:  0.7227 
+F-statistic: 36.19 on 2 and 25 DF,  p-value: 4.152e-08
+                    \end{verbatim}
+                    \begin{verbatim}
+
+model_full <- model_3.1
+
+# Get the residual sum of squares (RSS) for both models
+RSS_full <- sum(residuals(model_full)^2)
+RSS_reduced <- sum(residuals(model_reduced)^2)
+
+# Get the number of parameters 
+# (coefficients) in the full and reduced models
+p_full <- length(coef(model_full))  # including the intercept
+p_reduced <- length(coef(model_reduced))  # including the intercept
+
+# Get the degrees of freedom for the full model
+df_full <- df.residual(model_full)
+
+MSR_full <- (RSS_full - RSS_reduced) / (p_full - p_reduced)
+MSR_reduced <- RSS_reduced / df_full
+
+# Calculate the partial F-statistic
+F_statistic <-  MSR_full / MSR_reduced
+F_statistic
+#####################
+[1] 4.832354
+                    \end{verbatim}
+                    Using the adjusted $R^2$ value, we can see that the $R^2$ value for the full model is 0.7863, 
+                    and the $R^2$ value for the reduced model is 0.7433. Which implies that the full model is better than the reduced model.
+
+                    The partial F-statistic is 4.832354, and we know that $F = t^2$, then we have $t = 2.198262$. This matches 
+                    the t-statistic for $x_7$ in the full model. This implies that the F-statistic and the t-statistic for $\beta_7$
+                    are directly related.
+                \end{enumerate}
+                
+                
+                 
+    \end{enumerate}
+End of Assignment 3.
+\end{document}

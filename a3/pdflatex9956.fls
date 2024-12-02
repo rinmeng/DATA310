@@ -1,0 +1,5 @@
+PWD c:/Users/agarp/DATA310/a3
+INPUT c:/Users/agarp/AppData/Roaming/TinyTeX/texmf.cnf
+INPUT c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/web2c/texmf.cnf
+INPUT c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT c:/Users/agarp/DATA310/a3/a3.tex
