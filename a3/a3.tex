@@ -620,11 +620,42 @@ print(CI_y_hat)
                 the model performed significantly worst, as the $R^2$ and adjusted $R^2$ values are lower than the previous model 
                 and the confidence intervals are wider, which means that the estimates are less precise.
             \end{enumerate}
-            \item Bonus Problem
+            \item Given that a multiple linear regression model $\ytilde = \X \btilde + \etilde$ where
+            $\exE = 0$, $\etet = \sigma^2 \I$, and $\etilde$ is normally distributed and $\I$ is $n \times n$ identity matrx.
+            There are $k$ predictors and an intercept in the model. Suppose 
+            $\btilde = \begin{bmatrix} \btilde_1 \\ \btilde_2 \end{bmatrix}$ and $\btilde_2$ contains $r$ coefficients that we want to
+            test, i.e. $H_0 : \btilde_2 = \tilde{0}$. Partition $\X$ accordingly: $\X = \begin{bmatrix} \X_1 & \X_2 \end{bmatrix}$, where
+            the relevant extra sum of squares is:
+            \[ SSR(\btilde_2 | \btilde_1) = \hat{\btilde}^\T \X^\T \ytilde - \hat{\btilde}_1^\T \X_1^\T \ytilde \]
             \begin{enumerate}
                 \item Show that $SSR(\btilde_2 | \btilde_1) =  \etilde^\T (\HM - \HM_1) \etilde$, if $H_0: \beta_2 = 0$ is true.
-                \item Show that $\frac{SSR(\btilde_2 | \btilde_1)}{\sigma^2} \sim \chi^2_{(r)}$.
-                \item Show that $\frac{SSR(\btilde_2 | \btilde_1)}{MSE} \sim F(r, n - p)$.
+                \begin{proof}
+                    Recall that $\HM = \X \xtxinv \X^\T$, $\HM_1 = \X_1 \xtxinv_1 \X_1^\T$ 
+                    and that $(\HM - \HM_1)$ is idempotent and symmetric with rank $r$.
+                    Then we have
+                    \begin{align*}
+                        SSR(\btilde_2 | \btilde_1) &= \hat{\btilde}^\T \X^\T \ytilde - \hat{\btilde}_1^\T \X_1^\T \ytilde \\
+                        &= \etilde^\T \X \xtxinv \X^\T \etilde - \etilde^\T \X_1 \xtxinv_1 \X_1^\T \etilde \\
+                        &= \etilde^\T (\X \xtxinv \X^\T - \X_1 \xtxinv_1 \X_1^\T) \etilde \\
+                        &= \etilde^\T (\HM - \HM_1) \etilde
+                    \end{align*}
+                    $\therefore$ We have shown that $SSR(\btilde_2 | \btilde_1) =  \etilde^\T (\HM - \HM_1) \etilde$.
+                \end{proof}
+                \item Show that $\frac{SSR(\btilde_2 | s\btilde_1)}{\sigma^2} \sim \chi^2_{(r)}$.
+                \begin{proof}
+                    Since $\etilde \sim N(0, \sigma^2 \I)$, then its quadratic form, $\etilde^\T (\HM - \HM_1) \etilde$ is distributed as $\sigma^2 \chi^2_{(r)}$.
+                    Then we have $(\HM - \HM_1)$ is idempotent and symmetric with rank $r$, then we have
+                \[ \frac{SSR(\btilde_2 | \btilde_1)}{\sigma^2} = 
+                \frac{\etilde^\T (\HM - \HM_1) \etilde}{\sigma^2} \sim \frac{\sigma^2 \chi^2_{(r)}}{\sigma^2} = \chi^2_{(r)}\]
+                \end{proof}
+                \item Show that $\frac{SSR(\btilde_2 | \btilde_1)}{MSE} \sim F_{(r, n - p)}$.
+                \begin{proof}
+                    Recall that $MSE = \frac{SSE}{n - p}$, then we have
+                    \[ \frac{SSR(\btilde_2 | \btilde_1)}{MSE} = \frac{\etilde^\T (\HM - \HM_1) \etilde}{\sigma^2} \times \frac{\sigma^2}{SSE} \]
+                    \[= \frac{\sigma^2 \chi^2_{(r)}}{\sigma^2 \chi^2_{(n - p)}} = \frac{\chi^2_{(r)}}{\chi^2_{(n - p)}} \sim  F_{(r, n - p)}\]
+
+                    $\therefore$ We have shown that $\frac{SSR(\btilde_2 | \btilde_1)}{MSE} \sim  F_{(r, n - p)}$.
+                \end{proof}
             \end{enumerate}
                 
                 
