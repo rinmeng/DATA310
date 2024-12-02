@@ -469,6 +469,163 @@ F_statistic
                     the t-statistic for $x_7$ in the full model. This implies that the F-statistic and the t-statistic for $\beta_7$
                     are directly related.
                 \end{enumerate}
+
+        \item Problem 3.2 on page 125.
+                Using the results of Problem 3.1, we can show numericaly that the square of the simple correlation coefficient
+                between the observed values $y_i$ and the fitted values $\hat{y}_i$ is equal to the $R^2$.
+                 Where $R^2$ is the coefficient of determination, and the formula is as follows
+                \[R^2 = \frac{\text{SSR}}{\text{SST}} = 1 - \frac{\text{SSE}}{\text{SST}}\]
+                where $\text{SSR}$ is the sum of squares of the regression, $\text{SST}$ is the total sum of squares, 
+                and $\text{SSE}$ is the sum of squares of the error. The correlation coefficient $r$ 
+                between $y_i$ and $\hat{y}_i$ is given by
+                \[r = \frac{\text{Cov}(y, \hat{y})}{\sqrt{\text{Var}(y) \text{Var}(\hat{y})}}\]
+                and the claim is that $r^2 = R^2$.
+
+                \begin{verbatim}
+model <- lm(y ~ x2 + x7 + x8, data = table.b1)
+
+R_squared <- summary(model)$r.squared
+
+y_fitted <- fitted(model)
+y_observed <- table.b1$y
+r <- cor(y_observed, y_fitted)
+r_squared <- r^2
+cat("R squared (from model): ", R_squared, "\n")
+cat("R squared (from correlation): ", r_squared, "\n")
+#####################
+R squared (from model):  0.7863069 
+R squared (from correlation):  0.7863069 
+                \end{verbatim}
+                $\therefore$ We have shown that the square of the simple correlation 
+                coefficient $r^2$ between the observed values $y_i$ and the fitted values
+                 $\hat{y}_i$ is equal to the $R^2$.
+        \item Problem 3.3 on page 125.
+                Referring to Problem 3.1, 
+                \begin{enumerate}[a.]
+                    \item Find a 95\% confidence interval for $\beta_2$. Let $\text{CI}$ be the confidence interval.
+                    Then we need to find, 
+                    \[ \text{CI} = \hat{\beta}_2 \pm t_{(0.5, n - p)} \times \text{SE}(\hat{\beta}_2)\]
+                    where $\hat{\beta}_2$ is the estimate of $\beta_2$, $t_{\alpha/2, n - p}$ is the critical value of the $t$-distribution
+                    \begin{verbatim}
+coefficients <- summary(model)$coefficients
+beta_2 <- coefficients["x2", "Estimate"]
+SE_beta_2 <- coefficients["x2", "Std. Error"]
+
+df <- df.residual(model)
+
+t_crit <- qt(0.975, df)
+
+CI_beta_2 <- c(beta_2 - t_crit * SE_beta_2, 
+               beta_2 + t_crit * SE_beta_2)
+#####################
+[1] 0.002163664 0.005032477
+                    \end{verbatim}
+                    $\therefore$ The 95\% confidence interval for $\beta_2$ is $(0.002163664, 0.005032477)$.
+                    \item Find a 95\% confidence interval on the mean number of games won
+                    by a team when $x_2 = 2300$, $x_7 = 56.0$, and $x_8 = 2100$
+                    \begin{verbatim}
+# new obs
+new_obs <- data.frame(x2 = 2300, x7 = 56.0, x8 = 2100)
+
+# predict
+y_hat <- predict(model, new_obs)
+
+SE_y_hat <- predict(model, new_obs, se.fit = TRUE)$se.fit
+
+CI_y_hat <- c(y_hat - t_crit * SE_y_hat, 
+              y_hat + t_crit * SE_y_hat)
+print(CI_y_hat)
+#####################
+1        1 
+6.436203 7.996645 
+                    \end{verbatim}
+                    $\therefore$ The 95\% confidence interval for when $x_2 = 2300$, $x_7 = 56.0$, and $x_8 = 2100$ is $(6.436203, 7.996645)$.
+                \end{enumerate}
+        \item Problem 3.4 on page 126. Remodling table.b1 using, $x_7$ and $x_8$ as the predictors, and $y$ as the response.
+            \begin{enumerate}[a.]
+                \item Test for significane of regression 
+                \begin{verbatim}
+new_model <- lm(y ~ x7 + x8, data = table.b1)
+#####################
+Call:
+lm(formula = y ~ x7 + x8, data = table.b1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.7985 -1.5166 -0.5792  1.9927  4.5248 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)   
+(Intercept) 17.944319   9.862484   1.819  0.08084 . 
+x7           0.048371   0.119219   0.406  0.68839   
+x8          -0.006537   0.001758  -3.719  0.00102 **
+---
+Signif. codes:  0 ‘***’ 0.001 
+‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.432 on 25 degrees of freedom
+Multiple R-squared:  0.5477,	Adjusted R-squared:  0.5115 
+F-statistic: 15.13 on 2 and 25 DF,  
+p-value: 4.935e-05
+                \end{verbatim}
+                $\therefore$ The regression is \textbf{highly} significant because the p-value $4.935 \times 10^{-5} < 0.05$
+                \item Calculate the $R^2$ and adjusted $R^2$ values
+                \begin{verbatim}
+R_squared <- summary(new_model)$r.squared
+adj_R_squared <- summary(new_model)$adj.r.squared
+cat("R squared: ", R_squared, "\n")
+cat("Adjusted R squared: ", adj_R_squared, "\n")
+#####################
+R squared:  0.547682
+Adjusted R squared:  0.5114655
+                \end{verbatim}
+                $\therefore$ These $R^2$ and adjusted $R^2$ values computed compared to 3.1 are lower, signifying
+                that the model did not fit as well as the previous model.
+                \item Calcuate 95\% CI on $\beta_7$ and find 95\% CI on the mean number of games won by 
+                a team when $x_7 = 56.0$ and $x_8 = 2100$.
+                \begin{verbatim}
+coefficients <- summary(new_model)$coefficients
+beta_7 <- coefficients["x7", "Estimate"]
+SE_beta_7 <- coefficients["x7", "Std. Error"]
+
+df <- df.residual(new_model)
+
+t_crit <- qt(0.975, df)
+
+CI_beta_7 <- c(beta_7 - t_crit * SE_beta_7, 
+               beta_7 + t_crit * SE_beta_7)
+print(CI_beta_7)
+#####################
+[1] -0.1971643  0.2939060
+
+# new obs
+new_obs <- data.frame(x7 = 56.0, x8 = 2100)
+
+# predict
+y_hat <- predict(new_model, new_obs)
+
+SE_y_hat <- predict(new_model, 
+            new_obs, se.fit = TRUE)$se.fit
+
+CI_y_hat <- c(y_hat - t_crit * SE_y_hat,
+            y_hat + t_crit * SE_y_hat)
+print(CI_y_hat)
+#####################
+1        1 
+5.828643 8.023842 
+                \end{verbatim}
+                $\therefore$ The 95\% confidence interval for $\beta_7$ is $(-0.1971643, 0.2939060)$, 
+                and the 95\% confidence interval for when $x_7 = 56.0$ and $x_8 = 2100$ is $(5.828643, 8.023842)$.
+                \item Conclusions we can draw from this problem of omitting an important regressor $x_2$ from the model, is that
+                the model performed significantly worst, as the $R^2$ and adjusted $R^2$ values are lower than the previous model 
+                and the confidence intervals are wider, which means that the estimates are less precise.
+            \end{enumerate}
+            \item Bonus Problem
+            \begin{enumerate}
+                \item Show that $SSR(\btilde_2 | \btilde_1) =  \etilde^\T (\HM - \HM_1) \etilde$, if $H_0: \beta_2 = 0$ is true.
+                \item Show that $\frac{SSR(\btilde_2 | \btilde_1)}{\sigma^2} \sim \chi^2_{(r)}$.
+                \item Show that $\frac{SSR(\btilde_2 | \btilde_1)}{MSE} \sim F(r, n - p)}$.
+            \end{enumerate}
                 
                 
                  

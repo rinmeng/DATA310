@@ -1,39 +1,26 @@
-library(MPV)
 
-model_3.1 <- lm(y ~ x2 + x7 + x8, data = table.b1)
-summary_model_3.1 <- summary(model_3.1)
+new_model <- lm(y ~ x7 + x8, data = table.b1)
 
-anova_3.1 <- anova(model_3.1)
-anova_3.1
+coefficients <- summary(new_model)$coefficients
+beta_7 <- coefficients["x7", "Estimate"]
+SE_beta_7 <- coefficients["x7", "Std. Error"]
 
-t_stats <- summary_model_3.1$coefficients[, "t value"]
-t_stats
+df <- df.residual(new_model)
 
-# R squared
-r_squared <- summary_model_3.1$r.squared
-r_squared
+t_crit <- qt(0.975, df)
 
-# Adjusted R squared
-adj_r_squared <- summary_model_3.1$adj.r.squared
-adj_r_squared
+CI_beta_7 <- c(beta_7 - t_crit * SE_beta_7, 
+               beta_7 + t_crit * SE_beta_7)
+print(CI_beta_7)
 
-model_reduced <- lm(y ~ x2 + x8, data = table.b1)
-summary(model_reduced)
+# new obs
+new_obs <- data.frame(x7 = 56.0, x8 = 2100)
 
-model_full <- model_3.1
+# predict
+y_hat <- predict(new_model, new_obs)
 
-# Get the residual sum of squares (RSS) for both models
-RSS_full <- sum(residuals(model_full)^2)
-RSS_reduced <- sum(residuals(model_reduced)^2)
+SE_y_hat <- predict(new_model, new_obs, se.fit = TRUE)$se.fit
 
-# Get the number of parameters (coefficients) in the full and reduced models
-p_full <- length(coef(model_full))  # including the intercept
-p_reduced <- length(coef(model_reduced))  # including the intercept
-
-# Get the degrees of freedom for the full model
-df_full <- df.residual(model_full)
-
-# Calculate the partial F-statistic
-F_statistic <- ((RSS_reduced - RSS_full) / (p_full - p_reduced)) / (RSS_full / df_full)
-F_statistic
-
+CI_y_hat <- c(y_hat - t_crit * SE_y_hat,
+              y_hat + t_crit * SE_y_hat)
+print(CI_y_hat)

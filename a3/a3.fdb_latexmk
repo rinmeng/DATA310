@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1733127043.40831 "c:/Users/agarp/DATA310/a3/a3.tex" "a3.pdf" "a3" 1733127045.32049 0
-  "a3.aux" 1733127043 33 e6d77a6cc1977d88a849501f83258f9d "pdflatex"
-  "a3.tex" 1733127041 26319 1f75564e1d22f4ba32f3021f25afbec5 ""
+["pdflatex"] 1733129220.33007 "c:/Users/agarp/DATA310/a3/a3.tex" "a3.pdf" "a3" 1733129222.78743 2
+  "a3.aux" 1733129220 33 dca2c25acf2dd0fcc68a5b8e6d3e57b9 "pdflatex"
+  "a3.tex" 1733129217 33407 48bb1757d221af3425a8a5419da734c2 ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1726521896 1004 54797486969f23fa377b128694d548df ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1726521896 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1726521896 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -68,7 +68,7 @@
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1730167661 94778 586128d0518932816a6219e97e511aa0 ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf-var/web2c/pdftex/pdflatex.fmt" 1730167675 1901277 a63e56ffd768776a9cf55fb7fde5178a ""
   "c:/Users/agarp/AppData/Roaming/TinyTeX/texmf.cnf" 1726521909 956 26ec9cd9a5edcbea822f9dddc1187176 ""
-  "c:/Users/agarp/DATA310/a3/a3.tex" 1733127041 26319 1f75564e1d22f4ba32f3021f25afbec5 ""
+  "c:/Users/agarp/DATA310/a3/a3.tex" 1733129217 33407 48bb1757d221af3425a8a5419da734c2 ""
   (generated)
   "a3.aux"
   "a3.log"
